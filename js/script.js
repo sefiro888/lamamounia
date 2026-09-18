@@ -83,82 +83,131 @@ if(dialog){document.querySelectorAll('.gallery-open').forEach(button=>button.add
 /* El formulario de reserva se retiró: la reserva es por teléfono o WhatsApp,
    así que la web no recoge ningún dato personal. */
 
-// Avisos editables: contenido contrastado en Instagram y Google el 18/09/2026.
-// Cada aviso lleva su icono. Para añadir uno nuevo basta con otra entrada aquí.
-const announcement=document.querySelector('.announcement');
-if(announcement){
- const ICONS={
-  encargo:'<path d="M12 3.2 18.5 16h-13z"/><path d="M3 18.5h18"/><circle cx="12" cy="2" r="1.1"/>',
-  musica:'<path d="M9 17.5V5.2l10-2v12.1"/><circle cx="6.4" cy="17.8" r="2.6"/><circle cx="16.4" cy="15.3" r="2.6"/>',
-  carta:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8.5h6M9 12h6M9 15.5h3.5"/>'
- };
- const notices=[
-  {icon:'encargo',title:'Tu celebración, con sabor marroquí.',text:'Platos por encargo para compartir.',url:'index.html#encargos'},
-  {icon:'musica',title:'Música en directo en La Mamounia.',text:'Consulta las próximas fechas.',url:'index.html#noches'},
-  {icon:'carta',title:'142 platos de Marruecos y Líbano.',text:'Descubre la carta completa.',url:'carta.html'}
- ];
- const DURACION=7000;
- const reduce=matchMedia('(prefers-reduced-motion: reduce)');
- let current=0,timer=null,paused=reduce.matches;
- const link=announcement.querySelector('#announcement-link'),pause=announcement.querySelector('.announcement-pause');
+// Cinta de avisos: se desplaza sin parar, encadenando varios mensajes.
+// Para editar los avisos basta con tocar la lista `notices`.
+const announcement = document.querySelector('.announcement');
+if (announcement) {
+  const ICONS = {
+    encargo: '<path d="M12 3.2 18.5 16h-13z"/><path d="M3 18.5h18"/><circle cx="12" cy="2" r="1.1"/>',
+    musica: '<path d="M9 17.5V5.2l10-2v12.1"/><circle cx="6.4" cy="17.8" r="2.6"/><circle cx="16.4" cy="15.3" r="2.6"/>',
+    carta: '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8.5h6M9 12h6M9 15.5h3.5"/>',
+    mar: '<path d="M2 16.5c2 0 2-1.6 4-1.6s2 1.6 4 1.6 2-1.6 4-1.6 2 1.6 4 1.6 2-1.6 4-1.6"/><path d="M2 20.5c2 0 2-1.6 4-1.6s2 1.6 4 1.6 2-1.6 4-1.6 2 1.6 4 1.6 2-1.6 4-1.6"/><circle cx="17" cy="6" r="3"/>',
+    estrella: '<path d="M12 2.5 14.9 9l7 .6-5.3 4.6 1.6 6.8L12 17.4 5.8 21l1.6-6.8L2.1 9.6 9.1 9z"/>',
+    telefono: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>'
+  };
+  const notices = [
+    { icon: 'carta', text: '142 platos de Marruecos y Líbano', url: 'carta.html' },
+    { icon: 'encargo', text: 'Platos por encargo para tus celebraciones', url: 'index.html#encargos' },
+    { icon: 'musica', text: 'Música en directo: consulta las próximas fechas', url: 'index.html#actualidad' },
+    { icon: 'mar', text: 'Terraza en el Paseo Marítimo de Fuengirola', url: 'contacto.html' },
+    { icon: 'estrella', text: '4,8 sobre 5 con 622 reseñas en Google', url: 'https://share.google/9EEaPiWaH3FW9OBkY' },
+    { icon: 'telefono', text: 'Reserva llamando al 620 26 20 19', url: 'tel:+34620262019' }
+  ];
+  const VELOCIDAD = 62;   // píxeles por segundo
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
 
- // Barra de tiempo: se inyecta aquí para no repetirla en las cinco páginas.
- const progress=document.createElement('span');
- progress.className='announcement-progress';
- progress.setAttribute('aria-hidden','true');
- announcement.append(progress);
+  function crearAviso(item) {
+    const a = document.createElement('a');
+    a.className = 'ticker-item';
+    a.href = item.url;
+    if (item.url.startsWith('https:')) { a.target = '_blank'; a.rel = 'noopener'; }
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    icon.setAttribute('class', 'announcement-icon');
+    icon.setAttribute('viewBox', '0 0 24 24');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.innerHTML = ICONS[item.icon];
+    const span = document.createElement('span');
+    span.textContent = item.text;
+    a.append(icon, span);
+    return a;
+  }
 
- function paintNotice(){
-  const item=notices[current];
-  link.replaceChildren();
-  const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');
-  icon.setAttribute('class','announcement-icon');
-  icon.setAttribute('viewBox','0 0 24 24');
-  icon.setAttribute('aria-hidden','true');
-  icon.innerHTML=ICONS[item.icon];
-  const title=document.createElement('strong');
-  title.textContent=item.title;
-  const text=document.createElement('span');
-  text.className='announcement-text';
-  text.textContent=item.text;
-  const arrow=document.createElement('span');
-  arrow.className='announcement-arrow';
-  arrow.textContent='↗';
-  arrow.setAttribute('aria-hidden','true');
-  link.append(icon,title,text,arrow);
-  link.href=item.url;
-  link.target=item.url.startsWith('https:')?'_blank':'_self';
-  link.rel='noopener';
-  announcement.querySelector('.announcement-count').textContent=`${current+1} / ${notices.length}`;
-  // Reinicia la animación de entrada y la barra de tiempo.
-  link.classList.remove('is-entering');
-  progress.classList.remove('is-running');
-  void link.offsetWidth;
-  link.classList.add('is-entering');
-  if(!paused)progress.classList.add('is-running');
- }
- // Al parar se congelan las animaciones en su sitio en vez de reiniciarlas,
- // para que la barra de tiempo no siga corriendo con el carrusel detenido.
- function stopNotices(){clearInterval(timer);timer=null;announcement.classList.add('is-paused')}
- function startNotices(){
-  clearInterval(timer);timer=null;
-  if(paused||document.hidden||announcement.hidden){announcement.classList.add('is-paused');return}
-  announcement.classList.remove('is-paused');
-  progress.classList.remove('is-running');void progress.offsetWidth;progress.classList.add('is-running');
-  timer=setInterval(()=>{current=(current+1)%notices.length;paintNotice()},DURACION);
- }
- function paintPause(){pause.textContent=paused?'▷':'Ⅱ';pause.setAttribute('aria-label',paused?'Reanudar avisos automáticos':'Pausar avisos automáticos')}
- function manualNotice(step){current=(current+step+notices.length)%notices.length;paused=true;stopNotices();paintNotice();paintPause()}
- announcement.querySelector('.announcement-prev').addEventListener('click',()=>manualNotice(-1));
- announcement.querySelector('.announcement-next').addEventListener('click',()=>manualNotice(1));
- pause.addEventListener('click',()=>{paused=!paused;paintPause();startNotices()});
- announcement.querySelector('.announcement-close').addEventListener('click',()=>{announcement.hidden=true;stopNotices();document.querySelector('header .brand').focus()});
- announcement.addEventListener('mouseenter',stopNotices);announcement.addEventListener('mouseleave',()=>{if(!announcement.contains(document.activeElement))startNotices()});
- announcement.addEventListener('focusin',stopNotices);announcement.addEventListener('focusout',e=>{if(!announcement.contains(e.relatedTarget))startNotices()});
- document.addEventListener('visibilitychange',()=>document.hidden?stopNotices():startNotices());
- reduce.addEventListener('change',e=>{if(e.matches){paused=true;stopNotices();paintPause()}});
- paintPause();paintNotice();startNotices();
+  function crearSeparador() {
+    const s = document.createElement('span');
+    s.className = 'ticker-sep';
+    s.setAttribute('aria-hidden', 'true');
+    return s;
+  }
+
+  // Una pasada completa por todos los avisos.
+  function crearSecuencia(oculta) {
+    const grupo = document.createElement('div');
+    grupo.className = 'ticker-run';
+    if (oculta) grupo.setAttribute('aria-hidden', 'true');
+    for (const item of notices) {
+      grupo.append(crearAviso(item), crearSeparador());
+    }
+    return grupo;
+  }
+
+  // Se reconstruye el interior del aviso: el contenido estático del HTML
+  // queda como alternativa si este script no llega a ejecutarse.
+  announcement.replaceChildren();
+  const pista = document.createElement('div');
+  pista.className = 'ticker-track';
+  const cinta = document.createElement('div');
+  cinta.className = 'ticker';
+  cinta.append(pista);
+
+  const controles = document.createElement('div');
+  controles.className = 'announcement-controls';
+  const pausa = document.createElement('button');
+  pausa.type = 'button';
+  pausa.className = 'announcement-pause';
+  const cerrar = document.createElement('button');
+  cerrar.type = 'button';
+  cerrar.className = 'announcement-close';
+  cerrar.setAttribute('aria-label', 'Cerrar avisos');
+  cerrar.textContent = '×';
+  controles.append(pausa, cerrar);
+  announcement.append(cinta, controles);
+
+  /* La pista lleva dos mitades idénticas y se anima de 0 a -50%: al llegar,
+     la segunda está justo donde empezó la primera y el salto no se ve.
+     Cada mitad se repite hasta cubrir la pantalla, para que no queden huecos. */
+  function montar() {
+    pista.replaceChildren();
+    const medida = crearSecuencia(false);
+    pista.append(medida);
+    const anchoSecuencia = medida.scrollWidth;
+    if (!anchoSecuencia) return;
+    const copias = Math.max(1, Math.ceil(innerWidth / anchoSecuencia));
+    pista.replaceChildren();
+    for (let i = 0; i < copias; i++) pista.append(crearSecuencia(i > 0));
+    for (let i = 0; i < copias; i++) pista.append(crearSecuencia(true));
+    // Velocidad constante en píxeles por segundo, mida lo que mida el texto.
+    pista.style.animationDuration = `${(anchoSecuencia * copias) / VELOCIDAD}s`;
+  }
+
+  let parado = reduce.matches;
+  function pintarPausa() {
+    announcement.classList.toggle('is-paused', parado);
+    pausa.textContent = parado ? '▷' : 'Ⅱ';
+    pausa.setAttribute('aria-label', parado ? 'Reanudar los avisos' : 'Detener los avisos');
+  }
+  pausa.addEventListener('click', () => { parado = !parado; pintarPausa(); });
+  cerrar.addEventListener('click', () => {
+    announcement.hidden = true;
+    document.querySelector('header .brand').focus();
+  });
+  // Al pasar el ratón o llevar el foco dentro, la cinta se detiene para poder leer.
+  announcement.addEventListener('mouseenter', () => announcement.classList.add('is-hover'));
+  announcement.addEventListener('mouseleave', () => announcement.classList.remove('is-hover'));
+  announcement.addEventListener('focusin', () => announcement.classList.add('is-hover'));
+  announcement.addEventListener('focusout', e => {
+    if (!announcement.contains(e.relatedTarget)) announcement.classList.remove('is-hover');
+  });
+  reduce.addEventListener('change', e => { if (e.matches) { parado = true; pintarPausa(); } });
+
+  let remontar;
+  addEventListener('resize', () => { clearTimeout(remontar); remontar = setTimeout(montar, 220); });
+
+  montar();
+  pintarPausa();
+  // Las fuentes propias cambian el ancho del texto al cargar: se recalcula.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(montar);
 }
+
 /* Escenas del hero. Cada una usa una foto distinta acorde con su nombre.
    Hay que cambiar el srcset y no sólo el src: con srcset presente, el
    navegador lo prioriza y la imagen no cambiaba nunca. */

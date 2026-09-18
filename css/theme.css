@@ -535,3 +535,56 @@ body>.utility-bar,body>.announcement{z-index:40}
   #navigation{position:static;opacity:1;visibility:visible;transform:none;background:none;padding:0}
   #navigation:before{display:none}
 }
+
+/* =====================================================================
+   CINTA DE AVISOS
+   Movimiento continuo de derecha a izquierda, sin transiciones ni turnos.
+   La pista lleva dos mitades idénticas y se anima de 0 a -50%: al llegar,
+   la segunda mitad está justo donde empezó la primera y el bucle no se ve.
+   ===================================================================== */
+.announcement{padding:0 0 0 5%;gap:0;align-items:stretch}
+.ticker{flex:1;min-width:0;overflow:hidden;display:flex;align-items:center;
+  position:relative;z-index:2;-webkit-mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 28px,#000 calc(100% - 28px),transparent)}
+.ticker-track{display:flex;align-items:center;width:max-content;flex:none;
+  animation:ticker-rueda linear infinite;will-change:transform}
+@keyframes ticker-rueda{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-run{display:flex;align-items:center;flex:none}
+
+.ticker-item{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;
+  padding:16px 0;font-size:13.5px;letter-spacing:.015em;color:#2a1c0c}
+.ticker-item span{border-bottom:1px solid transparent;padding-bottom:1px;transition:border-color .25s}
+.ticker-item:hover span{border-bottom-color:#2a1c0c}
+.ticker-item .announcement-icon{width:19px;height:19px;flex-shrink:0;fill:none;stroke:#4a3212;
+  stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* Separador: la estrella de ocho puntas del restaurante, en pequeño */
+.ticker-sep{flex:none;width:44px;height:11px;opacity:.85;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='11'%20height='11'%20viewBox='0%200%2011%2011'%3E%3Cg%20fill='%234a3212'%3E%3Crect%20x='1.4'%20y='1.4'%20width='8.2'%20height='8.2'/%3E%3Crect%20x='1.4'%20y='1.4'%20width='8.2'%20height='8.2'%20transform='rotate(45%205.5%205.5)'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center}
+
+/* Detener: al pausar, con el ratón encima o con el foco dentro */
+.announcement.is-paused .ticker-track,
+.announcement.is-hover .ticker-track{animation-play-state:paused}
+.announcement.is-paused:before,.announcement.is-paused:after,
+.announcement.is-hover:before,.announcement.is-hover:after{animation-play-state:paused}
+
+.announcement-controls{padding-right:2.5%;gap:2px}
+
+@media(max-width:900px){
+  .announcement{padding-left:4%}
+  .ticker-item{font-size:12.5px;gap:9px}
+  .ticker-sep{width:34px}
+}
+@media(max-width:560px){
+  .announcement{min-height:0;padding:0 0 0 5%;align-items:stretch}
+  .ticker-item{font-size:12px;padding:13px 0}
+  .ticker-item .announcement-icon{width:17px;height:17px}
+  .ticker-sep{width:28px}
+  .announcement-controls{padding-right:1.5%}
+  .announcement-controls button{width:30px;height:auto}
+}
+/* Sin movimiento: la cinta se queda quieta mostrando los primeros avisos */
+@media(prefers-reduced-motion:reduce){
+  .ticker-track{animation:none}
+}

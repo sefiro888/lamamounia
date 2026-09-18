@@ -351,3 +351,22 @@ Se retira del hero: en móvil tapaba justo el centro de la fotografía.
 - A 1200 px: barra horizontal, sin rastro de los elementos del panel, sin desbordamiento.
 - Las tres escenas del hero cargan tres archivos distintos, comprobado con `currentSrc`.
 - Consola sin errores.
+
+## Novena revisión — el banner pasa a ser una cinta continua (18/09/2026)
+
+El banner turnaba un aviso cada 7 segundos. Ahora es **una cinta que se desplaza sin parar**, encadenando seis mensajes, al estilo de un teletipo.
+
+- Seis avisos con su icono: la carta, los encargos, la música en directo, la terraza, la valoración de Google y el teléfono de reservas.
+- Separados por la estrella de ocho puntas del restaurante, en pequeño.
+- **Velocidad constante de 62 píxeles por segundo**, calculada a partir del ancho real del texto, para que no dependa de lo largos que sean los mensajes ni del tamaño de la pantalla.
+- Los bordes se difuminan con una máscara, así los mensajes entran y salen sin cortarse de golpe.
+
+**Cómo se consigue el bucle sin saltos**: la pista lleva dos mitades idénticas y se anima de `translateX(0)` a `translateX(-50%)`. Al terminar, la segunda mitad está exactamente donde empezó la primera, así que el reinicio es invisible. Cada mitad se repite las veces necesarias para cubrir la pantalla, de modo que nunca quedan huecos en pantallas anchas.
+
+**Se puede parar**, que es obligatorio para contenido en movimiento: con el botón de pausa, al poner el ratón encima o al llevar el foco dentro de la cinta. Con `prefers-reduced-motion` la cinta no se mueve en absoluto.
+
+Se retiraron los controles de anterior y siguiente y el contador, que no tienen sentido en un movimiento continuo. Quedan pausa y cerrar.
+
+El contenido del `<aside>` en el HTML se reduce a un solo aviso: sirve de alternativa por si el JavaScript no llega a ejecutarse, y así no quedan botones que no hacen nada.
+
+Los avisos se editan en la lista `notices` de `js/script.js`, y la velocidad en la constante `VELOCIDAD`.
