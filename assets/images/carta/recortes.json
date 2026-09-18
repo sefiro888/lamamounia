@@ -1,0 +1,884 @@
+[
+  {
+    "archivo": "145233-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145233.png",
+    "caja": [
+      0,
+      36,
+      162,
+      210
+    ],
+    "tamano": [
+      162,
+      174
+    ]
+  },
+  {
+    "archivo": "145233-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145233.png",
+    "caja": [
+      515,
+      36,
+      677,
+      210
+    ],
+    "tamano": [
+      162,
+      174
+    ]
+  },
+  {
+    "archivo": "145233-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145233.png",
+    "caja": [
+      238,
+      248,
+      426,
+      435
+    ],
+    "tamano": [
+      188,
+      187
+    ]
+  },
+  {
+    "archivo": "145233-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145233.png",
+    "caja": [
+      0,
+      486,
+      189,
+      664
+    ],
+    "tamano": [
+      189,
+      178
+    ]
+  },
+  {
+    "archivo": "145233-05.png",
+    "origen": "Captura de pantalla 2026-09-18 145233.png",
+    "caja": [
+      510,
+      486,
+      650,
+      664
+    ],
+    "tamano": [
+      140,
+      178
+    ]
+  },
+  {
+    "archivo": "145233-06.png",
+    "origen": "Captura de pantalla 2026-09-18 145233.png",
+    "caja": [
+      219,
+      704,
+      468,
+      930
+    ],
+    "tamano": [
+      249,
+      226
+    ]
+  },
+  {
+    "archivo": "145249-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145249.png",
+    "caja": [
+      0,
+      23,
+      184,
+      209
+    ],
+    "tamano": [
+      184,
+      186
+    ]
+  },
+  {
+    "archivo": "145249-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145249.png",
+    "caja": [
+      524,
+      23,
+      704,
+      209
+    ],
+    "tamano": [
+      180,
+      186
+    ]
+  },
+  {
+    "archivo": "145249-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145249.png",
+    "caja": [
+      269,
+      245,
+      451,
+      421
+    ],
+    "tamano": [
+      182,
+      176
+    ]
+  },
+  {
+    "archivo": "145249-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145249.png",
+    "caja": [
+      0,
+      488,
+      184,
+      671
+    ],
+    "tamano": [
+      184,
+      183
+    ]
+  },
+  {
+    "archivo": "145249-05.png",
+    "origen": "Captura de pantalla 2026-09-18 145249.png",
+    "caja": [
+      513,
+      488,
+      705,
+      671
+    ],
+    "tamano": [
+      192,
+      183
+    ]
+  },
+  {
+    "archivo": "145249-06.png",
+    "origen": "Captura de pantalla 2026-09-18 145249.png",
+    "caja": [
+      238,
+      724,
+      466,
+      927
+    ],
+    "tamano": [
+      228,
+      203
+    ]
+  },
+  {
+    "archivo": "145306-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145306.png",
+    "caja": [
+      31,
+      8,
+      191,
+      162
+    ],
+    "tamano": [
+      160,
+      154
+    ]
+  },
+  {
+    "archivo": "145306-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145306.png",
+    "caja": [
+      261,
+      8,
+      372,
+      162
+    ],
+    "tamano": [
+      111,
+      154
+    ]
+  },
+  {
+    "archivo": "145306-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145306.png",
+    "caja": [
+      33,
+      196,
+      196,
+      378
+    ],
+    "tamano": [
+      163,
+      182
+    ]
+  },
+  {
+    "archivo": "145306-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145306.png",
+    "caja": [
+      262,
+      196,
+      438,
+      378
+    ],
+    "tamano": [
+      176,
+      182
+    ]
+  },
+  {
+    "archivo": "145306-05.png",
+    "origen": "Captura de pantalla 2026-09-18 145306.png",
+    "caja": [
+      36,
+      405,
+      189,
+      567
+    ],
+    "tamano": [
+      153,
+      162
+    ]
+  },
+  {
+    "archivo": "145306-06.png",
+    "origen": "Captura de pantalla 2026-09-18 145306.png",
+    "caja": [
+      0,
+      671,
+      266,
+      860
+    ],
+    "tamano": [
+      266,
+      189
+    ]
+  },
+  {
+    "archivo": "145306-07.png",
+    "origen": "Captura de pantalla 2026-09-18 145306.png",
+    "caja": [
+      0,
+      872,
+      690,
+      1087
+    ],
+    "tamano": [
+      690,
+      215
+    ]
+  },
+  {
+    "archivo": "145319-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145319.png",
+    "caja": [
+      119,
+      130,
+      581,
+      399
+    ],
+    "tamano": [
+      462,
+      269
+    ]
+  },
+  {
+    "archivo": "145319-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145319.png",
+    "caja": [
+      2,
+      696,
+      195,
+      1007
+    ],
+    "tamano": [
+      193,
+      311
+    ]
+  },
+  {
+    "archivo": "145319-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145319.png",
+    "caja": [
+      254,
+      696,
+      387,
+      1007
+    ],
+    "tamano": [
+      133,
+      311
+    ]
+  },
+  {
+    "archivo": "145319-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145319.png",
+    "caja": [
+      404,
+      696,
+      711,
+      1007
+    ],
+    "tamano": [
+      307,
+      311
+    ]
+  },
+  {
+    "archivo": "145339-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      0,
+      52,
+      154,
+      219
+    ],
+    "tamano": [
+      154,
+      167
+    ]
+  },
+  {
+    "archivo": "145339-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      171,
+      52,
+      336,
+      219
+    ],
+    "tamano": [
+      165,
+      167
+    ]
+  },
+  {
+    "archivo": "145339-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      372,
+      52,
+      537,
+      219
+    ],
+    "tamano": [
+      165,
+      167
+    ]
+  },
+  {
+    "archivo": "145339-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      552,
+      52,
+      702,
+      219
+    ],
+    "tamano": [
+      150,
+      167
+    ]
+  },
+  {
+    "archivo": "145339-05.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      15,
+      336,
+      176,
+      504
+    ],
+    "tamano": [
+      161,
+      168
+    ]
+  },
+  {
+    "archivo": "145339-06.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      260,
+      336,
+      426,
+      504
+    ],
+    "tamano": [
+      166,
+      168
+    ]
+  },
+  {
+    "archivo": "145339-07.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      513,
+      336,
+      679,
+      504
+    ],
+    "tamano": [
+      166,
+      168
+    ]
+  },
+  {
+    "archivo": "145339-08.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      41,
+      673,
+      312,
+      953
+    ],
+    "tamano": [
+      271,
+      280
+    ]
+  },
+  {
+    "archivo": "145339-09.png",
+    "origen": "Captura de pantalla 2026-09-18 145339.png",
+    "caja": [
+      396,
+      673,
+      534,
+      953
+    ],
+    "tamano": [
+      138,
+      280
+    ]
+  },
+  {
+    "archivo": "145348-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145348.png",
+    "caja": [
+      0,
+      78,
+      156,
+      233
+    ],
+    "tamano": [
+      156,
+      155
+    ]
+  },
+  {
+    "archivo": "145348-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145348.png",
+    "caja": [
+      0,
+      258,
+      159,
+      416
+    ],
+    "tamano": [
+      159,
+      158
+    ]
+  },
+  {
+    "archivo": "145348-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145348.png",
+    "caja": [
+      0,
+      444,
+      160,
+      604
+    ],
+    "tamano": [
+      160,
+      160
+    ]
+  },
+  {
+    "archivo": "145348-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145348.png",
+    "caja": [
+      175,
+      444,
+      338,
+      604
+    ],
+    "tamano": [
+      163,
+      160
+    ]
+  },
+  {
+    "archivo": "145348-05.png",
+    "origen": "Captura de pantalla 2026-09-18 145348.png",
+    "caja": [
+      0,
+      728,
+      321,
+      990
+    ],
+    "tamano": [
+      321,
+      262
+    ]
+  },
+  {
+    "archivo": "145356-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145356.png",
+    "caja": [
+      0,
+      0,
+      709,
+      197
+    ],
+    "tamano": [
+      709,
+      197
+    ]
+  },
+  {
+    "archivo": "145356-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145356.png",
+    "caja": [
+      12,
+      581,
+      263,
+      929
+    ],
+    "tamano": [
+      251,
+      348
+    ]
+  },
+  {
+    "archivo": "145356-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145356.png",
+    "caja": [
+      455,
+      581,
+      709,
+      929
+    ],
+    "tamano": [
+      254,
+      348
+    ]
+  },
+  {
+    "archivo": "145407-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145407.png",
+    "caja": [
+      0,
+      318,
+      210,
+      490
+    ],
+    "tamano": [
+      210,
+      172
+    ]
+  },
+  {
+    "archivo": "145407-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145407.png",
+    "caja": [
+      4,
+      500,
+      200,
+      675
+    ],
+    "tamano": [
+      196,
+      175
+    ]
+  },
+  {
+    "archivo": "145407-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145407.png",
+    "caja": [
+      0,
+      686,
+      212,
+      856
+    ],
+    "tamano": [
+      212,
+      170
+    ]
+  },
+  {
+    "archivo": "145407-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145407.png",
+    "caja": [
+      224,
+      686,
+      347,
+      856
+    ],
+    "tamano": [
+      123,
+      170
+    ]
+  },
+  {
+    "archivo": "145407-05.png",
+    "origen": "Captura de pantalla 2026-09-18 145407.png",
+    "caja": [
+      0,
+      878,
+      212,
+      1051
+    ],
+    "tamano": [
+      212,
+      173
+    ]
+  },
+  {
+    "archivo": "145407-06.png",
+    "origen": "Captura de pantalla 2026-09-18 145407.png",
+    "caja": [
+      223,
+      878,
+      345,
+      1051
+    ],
+    "tamano": [
+      122,
+      173
+    ]
+  },
+  {
+    "archivo": "145407-07.png",
+    "origen": "Captura de pantalla 2026-09-18 145407.png",
+    "caja": [
+      481,
+      878,
+      607,
+      1051
+    ],
+    "tamano": [
+      126,
+      173
+    ]
+  },
+  {
+    "archivo": "145422-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145422.png",
+    "caja": [
+      22,
+      148,
+      297,
+      383
+    ],
+    "tamano": [
+      275,
+      235
+    ]
+  },
+  {
+    "archivo": "145422-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145422.png",
+    "caja": [
+      417,
+      148,
+      692,
+      383
+    ],
+    "tamano": [
+      275,
+      235
+    ]
+  },
+  {
+    "archivo": "145422-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145422.png",
+    "caja": [
+      21,
+      560,
+      295,
+      795
+    ],
+    "tamano": [
+      274,
+      235
+    ]
+  },
+  {
+    "archivo": "145422-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145422.png",
+    "caja": [
+      427,
+      560,
+      701,
+      795
+    ],
+    "tamano": [
+      274,
+      235
+    ]
+  },
+  {
+    "archivo": "145429-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145429.png",
+    "caja": [
+      9,
+      217,
+      180,
+      343
+    ],
+    "tamano": [
+      171,
+      126
+    ]
+  },
+  {
+    "archivo": "145429-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145429.png",
+    "caja": [
+      5,
+      382,
+      185,
+      533
+    ],
+    "tamano": [
+      180,
+      151
+    ]
+  },
+  {
+    "archivo": "145429-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145429.png",
+    "caja": [
+      384,
+      382,
+      497,
+      533
+    ],
+    "tamano": [
+      113,
+      151
+    ]
+  },
+  {
+    "archivo": "145429-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145429.png",
+    "caja": [
+      5,
+      571,
+      181,
+      733
+    ],
+    "tamano": [
+      176,
+      162
+    ]
+  },
+  {
+    "archivo": "145429-05.png",
+    "origen": "Captura de pantalla 2026-09-18 145429.png",
+    "caja": [
+      418,
+      571,
+      526,
+      733
+    ],
+    "tamano": [
+      108,
+      162
+    ]
+  },
+  {
+    "archivo": "145429-06.png",
+    "origen": "Captura de pantalla 2026-09-18 145429.png",
+    "caja": [
+      20,
+      768,
+      167,
+      888
+    ],
+    "tamano": [
+      147,
+      120
+    ]
+  },
+  {
+    "archivo": "145429-07.png",
+    "origen": "Captura de pantalla 2026-09-18 145429.png",
+    "caja": [
+      352,
+      768,
+      510,
+      888
+    ],
+    "tamano": [
+      158,
+      120
+    ]
+  },
+  {
+    "archivo": "145429-08.png",
+    "origen": "Captura de pantalla 2026-09-18 145429.png",
+    "caja": [
+      0,
+      920,
+      697,
+      1095
+    ],
+    "tamano": [
+      697,
+      175
+    ]
+  },
+  {
+    "archivo": "145439-01.png",
+    "origen": "Captura de pantalla 2026-09-18 145439.png",
+    "caja": [
+      0,
+      0,
+      694,
+      153
+    ],
+    "tamano": [
+      694,
+      153
+    ]
+  },
+  {
+    "archivo": "145439-02.png",
+    "origen": "Captura de pantalla 2026-09-18 145439.png",
+    "caja": [
+      273,
+      269,
+      418,
+      408
+    ],
+    "tamano": [
+      145,
+      139
+    ]
+  },
+  {
+    "archivo": "145439-03.png",
+    "origen": "Captura de pantalla 2026-09-18 145439.png",
+    "caja": [
+      259,
+      548,
+      431,
+      710
+    ],
+    "tamano": [
+      172,
+      162
+    ]
+  },
+  {
+    "archivo": "145439-04.png",
+    "origen": "Captura de pantalla 2026-09-18 145439.png",
+    "caja": [
+      242,
+      870,
+      448,
+      996
+    ],
+    "tamano": [
+      206,
+      126
+    ]
+  }
+]

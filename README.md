@@ -264,3 +264,53 @@ El tercer aviso pasa a anunciar la carta completa («142 platos de Marruecos y L
 En móvil el banner usa una rejilla explícita de dos filas — `[icono] [título] [flecha]` sobre `[texto]` — porque con flex el título y el texto competían por la misma línea y la flecha caía suelta en una tercera.
 
 Los avisos se siguen editando en el array `notices` de `js/script.js`. La duración está en la constante `DURACION` y debe coincidir con los 7 s de las animaciones `banner-shine` y `banner-progreso` de `css/theme.css`.
+
+## Séptima revisión — la carta real del restaurante (18/09/2026)
+
+Se han incorporado las páginas de la carta que el restaurante publica en su Instagram (destacado «OUR MENU»), leídas el 18/09/2026. Son su carta actual, bilingüe español/inglés, y mandan sobre TheFork.
+
+### Precios de bebida corregidos
+
+**Los precios de bebida que había, tomados de TheFork, eran falsos**: más baratos que los reales. Publicar eso es el peor error posible en la web de un restaurante, porque el cliente llega, paga más y se enfada. Corregidos:
+
+| | Antes (TheFork) | Ahora (su carta) |
+|---|---|---|
+| Coca-Cola | 2,00 € | 3,50 € |
+| Café espresso | 1,50 € | 2,00 € |
+| Café con leche | 1,80 € | 2,50 € |
+| Cappuccino | 2,00 € | 3,50 € |
+| Té marroquí | 2,50 € | 3,50 € por persona |
+| Agua mineral | 2,00 € | 2,90 € (0,5 l) / 4,50 € (1 l) |
+| Zumo de naranja | 2,50 € | 4,50 € |
+
+Añadidos Nestea Maracuyá, Schweppes Tonic, Pom's, Hawaï, Orangina y los Aquarius. **Los precios de comida sí coincidían** con TheFork, uno a uno.
+
+**Cervezas, vinos y destilados** no aparecen en esas páginas, así que conservan los precios de TheFork y se marcan en los datos con `pendiente: true`. La carta muestra en esas secciones un aviso de precio sin confirmar. Conviene pedir al restaurante su carta de alcohol.
+
+### Datos que sólo estaban en su carta
+
+- **Fórmula mezze para una persona: 17,50 €** (antes sólo constaba la de 35 € para dos).
+- Los shawarmas se sirven **con patatas fritas**.
+- Los mezzes van **con pan de pita**; las ensaladas, **con pan marroquí**; los tajines, **con pan casero caliente**.
+- Al cuscús se le puede **añadir merguez (+3 €)** o pedirlo **con jarrete de cordero (+5 €)**.
+- La parrilla se sirve **a la oriental o a la marroquí**.
+
+### El mosaico, ahora el suyo
+
+La cenefa que se usaba estaba dibujada a ojo, en dorado. Se ha sustituido por **el mosaico real de su carta impresa**, redibujado en SVG a partir de la captura de su cenefa. La paleta se midió sobre la imagen: hueso `#e8e3dd`, azul aciano `#6474a3`, granate `#470c02`, terracota `#c14c28` y ámbar `#e1b45f`, en su secuencia original azul–granate–terracota–granate.
+
+Se redibuja en vez de usar la imagen porque un SVG se ve nítido a cualquier tamaño y pesa 1,2 KB. Se genera con `make-zellige.py`, que deja los archivos en `assets/icons/` y escribe el data-URI para el CSS. Ahora aparece en los separadores, las cabeceras de capítulo, el pie y el bloque de reserva.
+
+### Fotografías: de 13 a 48
+
+`extract-photos.py` recorta las fotos de plato de las capturas: detecta lo que no es fondo, lo separa en bloques y distingue una fotografía de un texto por la variedad de color. `assign-photos.py` asigna cada recorte a su plato, recorta el título que algunos arrastran, normaliza a 320 px en WebP y genera `assets/images/carta/revision.png`, una hoja de contactos etiquetada **que se revisó una a una** para descartar que alguna foto estuviera en el plato equivocado.
+
+**Cobertura: 48 de los 66 platos de cocina (73 %)**, frente a 13 (20 %). Los 18 restantes son sobre todo acompañamientos (pan, arroz, patatas) y platos que no se pudieron identificar con certeza; ante la duda se deja sin foto, porque una foto equivocada es peor que ninguna.
+
+**Límite de calidad**: proceden de capturas de pantalla de ~700 px de ancho, así que cada recorte tiene entre 140 y 320 px reales. Dan de sobra para las miniaturas de la carta (132-168 px), pero **no da para ampliarlas**: el detalle que la captura perdió no se puede recuperar. Bajar las imágenes originales del destacado de Instagram (1080 px) duplicaría la resolución.
+
+Sólo dos platos conservan su foto de Glovo: Tajín de dorada y Pastilla fes.
+
+### Nota sobre los auxiliares
+
+`make-zellige.py`, `extract-photos.py` y `assign-photos.py` son reejecutables y están documentados, pero se excluyen del repositorio junto con las capturas y los recortes intermedios: son material de trabajo, no del sitio. Los WebP finales y los JSON de trazabilidad sí se publican.

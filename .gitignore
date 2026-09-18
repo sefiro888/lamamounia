@@ -11,3 +11,10 @@ glovo-source.html
 import-glovo.py
 document-refresh.py
 integrate-glovo.py
+
+# Capturas de la carta y recortes intermedios: material de trabajo, no del sitio.
+assets/Captura*.png
+assets/images/carta/*.png
+make-zellige.py
+extract-photos.py
+assign-photos.py

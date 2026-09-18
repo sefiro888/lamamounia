@@ -1,9 +1,11 @@
 'use strict';
 /* ---------------------------------------------------------------------------
    CARTA DE LA MAMOUNIA FUENGIROLA
-   Fuente: carta publicada en TheFork (última modificación 17/12/2025),
-   consultada el 18/09/2026. Precios de referencia publicados por el
-   establecimiento, no un feed en vivo del restaurante.
+   Fuente: la carta bilingüe que el restaurante publica en su Instagram
+   (destacado «OUR MENU»), leída el 18/09/2026. Los precios de comida
+   coinciden con los de TheFork; los de bebida NO, y mandan los de su carta.
+   Las secciones marcadas con `pendiente: true` siguen con precios de
+   TheFork porque su carta de alcohol no se ha podido consultar.
 
    La carta se lee de arriba abajo en el orden de una comida. Se organiza en
    CAPÍTULOS (entrantes, ensaladas, principales…) y, dentro, en SECCIONES.
@@ -34,13 +36,15 @@ const MENU = [
         id: 'mezze-dos',
         nombre: 'Mezze para dos',
         platos: [
-          ['Fórmula mezze frío y caliente', 35, 'Un surtido generoso de mezzes fríos y calientes, perfecto para compartir y descubrir los sabores de Oriente Medio. Para dos personas.', ['especialidad']]
+          ['Fórmula mezze frío y caliente', 35, 'Un surtido generoso de mezzes fríos y calientes, perfecto para compartir y descubrir los sabores de Oriente Medio. El plato, para dos personas.', ['especialidad']],
+          ['Fórmula mezze para una persona', 17.5, 'La misma fórmula, adaptada a una sola persona.', ['especialidad']]
         ]
       },
       {
         id: 'mezze-frios',
         nombre: 'Mezzes fríos',
         original: 'Sabores frescos del Líbano',
+        descripcion: 'Nuestros mezzes se sirven con pan de pita.',
         platos: [
           ['Humus', 8.9, 'Garbanzos, tahini y zumo de limón.', ['sin-carne']],
           ['Moutabal', 8.9, 'Berenjena, tahini y zumo de limón.', ['sin-carne']],
@@ -102,6 +106,7 @@ const MENU = [
         id: 'ensaladas-marroquies',
         nombre: 'Ensaladas marroquíes',
         original: 'Las ensaladas de La Mamounia',
+        descripcion: 'Nuestras ensaladas se sirven con pan marroquí.',
         platos: [
           ['Zaalouk', 8.9, 'Berenjena y tomate.', ['sin-carne']],
           ['Bekoula', 8.9, 'Ensalada de espinacas.', ['sin-carne']],
@@ -149,7 +154,7 @@ const MENU = [
         id: 'tajines',
         nombre: 'Tajines',
         original: 'Tesoros del tajine',
-        descripcion: 'Guisados despacio en cazuela de barro.',
+        descripcion: 'Cocinados a fuego lento según la tradición marroquí y servidos con pan casero caliente.',
         platos: [
           ['Kefta tajine', 13.9, 'Albóndigas de carne especiada cocinadas en salsa de tomate.', []],
           ['Tajine de kefta de sardina', 13.9, 'Kefta de sardinas frescas con una sabrosa salsa de tomate.', []],
@@ -161,6 +166,7 @@ const MENU = [
         id: 'cuscus',
         nombre: 'Cuscús',
         original: 'Cuscús tradición',
+        descripcion: 'Al vapor, con sémola fina, verduras tiernas y caldo aromático. Puedes añadir merguez (+3 €) o pedirlo con jarrete de cordero (+5 €).',
         platos: [
           ['Cuscús vegetariano', 13.9, 'Con verduras de temporada y tfaya.', ['sin-carne']],
           ['Cuscús tfaya', 14.9, 'Con pollo, cebolla confitada y pasas caramelizadas.', []],
@@ -180,7 +186,7 @@ const MENU = [
       {
         id: 'shawarma',
         nombre: 'Shawarma',
-        descripcion: 'Cortado del asador, al estilo libanés.',
+        descripcion: 'Todos nuestros shawarmas se sirven con patatas fritas.',
         platos: [
           ['Shawarma de pollo', 9.9, 'Pollo marinado con especias libanesas, asado a la perfección.', []],
           ['Shawarma de ternera', 9.9, 'Ternera tierna marinada con especias, asada al estilo libanés.', []],
@@ -199,6 +205,7 @@ const MENU = [
         id: 'brasa',
         nombre: 'Brochetas y parrilla',
         original: 'A la parrilla y glorioso',
+        descripcion: 'Dos formas de disfrutarlas: a la oriental o a la marroquí.',
         platos: [
           ['2 Brochetas de pollo marinado', 13.9, '', []],
           ['2 Brochetas de kefta', 14.9, '', []],
@@ -245,56 +252,68 @@ const MENU = [
     id: 'bebidas',
     nombre: 'Bebidas',
     subtitulo: 'Del té moruno a la bodega',
-    entradilla: 'El té marroquí es parte del rito, no un añadido al final.',
+    entradilla: 'El té marroquí se sirve al estilo tradicional y es parte del rito, no un añadido al final.',
     secciones: [
       {
         id: 'te-cafe',
-        nombre: 'Té, café e infusiones',
-        original: 'Calientes',
+        nombre: 'Cafés y tés',
+        original: 'Cafés y tés',
+        descripcion: 'El té marroquí, servido al estilo tradicional, son 3,50 € por persona.',
         platos: [
-          ['Té marroquí', 2.5, '', ['sin-carne']],
-          ['Té clásico', 2, '', ['sin-carne']],
-          ['Té verde', 2, '', ['sin-carne']],
-          ['Té rojo', 2, '', ['sin-carne']],
-          ['Café solo', 1.5, '', ['sin-carne']],
-          ['Café espresso', 1.5, '', ['sin-carne']],
-          ['Cortado', 1.5, '', ['sin-carne']],
-          ['Café con leche', 1.8, '', ['sin-carne']],
-          ['Americano', 2, '', ['sin-carne']],
-          ['Capuchino', 2, '', ['sin-carne']],
-          ['Cacao', 2, '', ['sin-carne']]
+          ['Té marroquí al estilo tradicional', 3.5, 'Precio por persona.', ['sin-carne', 'especialidad']],
+          ['Infusión té', 3.5, '', ['sin-carne']],
+          ['Café espresso', 2, '', ['sin-carne']],
+          ['Cortado', 2, '', ['sin-carne']],
+          ['Café con leche', 2.5, '', ['sin-carne']],
+          ['Café americano', 2.5, '', ['sin-carne']],
+          ['Cappuccino', 3.5, '', ['sin-carne']]
         ]
       },
       {
         id: 'refrescos',
         nombre: 'Refrescos',
         platos: [
-          ['Coca-Cola', 2, '', ['sin-carne']],
-          ['Coca-Cola Zero', 2, '', ['sin-carne']],
-          ['Fanta naranja', 2, '', ['sin-carne']],
-          ['Fanta limón', 2, '', ['sin-carne']],
-          ['Sprite', 2, '', ['sin-carne']],
-          ['Tónica', 2, '', ['sin-carne']],
-          ['Red Bull', 2, '', ['sin-carne']],
-          ['Aquarius', 2, '', ['sin-carne']],
-          ['Nestea', 2, '', ['sin-carne']],
-          ['Agua mineral', 2, '', ['sin-carne']],
-          ['Agua con gas', 2, '', ['sin-carne']]
+          ['Coca-Cola', 3.5, '', ['sin-carne']],
+          ['Coca-Cola Zero', 3.5, '', ['sin-carne']],
+          ['Fanta naranja', 3.5, '', ['sin-carne']],
+          ['Fanta limón', 3.5, '', ['sin-carne']],
+          ['Sprite', 3.5, '', ['sin-carne']],
+          ['Aquarius limón', 3.5, '', ['sin-carne']],
+          ['Aquarius naranja', 3.5, '', ['sin-carne']],
+          ['Nestea Lemon', 3.5, '', ['sin-carne']],
+          ['Nestea Maracuyá', 3.5, '', ['sin-carne']],
+          ['Schweppes Tonic', 3.5, '', ['sin-carne']],
+          ["Pom's", 3.9, '', ['sin-carne']],
+          ['Hawaï', 3.9, '', ['sin-carne']],
+          ['Orangina', 3.9, '', ['sin-carne']],
+          ['Red Bull', 3.9, '', ['sin-carne']]
         ]
       },
       {
         id: 'zumos',
         nombre: 'Zumos',
         platos: [
-          ['Zumo de piña', 2.5, '', ['sin-carne']],
-          ['Zumo de melocotón', 2.5, '', ['sin-carne']],
-          ['Zumo de naranja', 2.5, '', ['sin-carne']],
-          ['Zumo de naranja natural', 3.5, '', ['sin-carne']]
+          ['Zumo de naranja', 4.5, '', ['sin-carne']],
+          ['Zumo de manzana', 3.5, '', ['sin-carne']],
+          ['Zumo multifrutas', 3.5, '', ['sin-carne']]
+        ]
+      },
+      {
+        id: 'agua',
+        nombre: 'Agua',
+        platos: [
+          ['Agua mineral 0,5 l', 2.9, '', ['sin-carne']],
+          ['Agua mineral 1 l', 4.5, '', ['sin-carne']],
+          ['Agua con gas', 2.9, '', ['sin-carne']]
         ]
       },
       {
         id: 'cerveza',
         nombre: 'Cervezas',
+        // Precios de TheFork (17/12/2025). Los refrescos y cafés de esa misma
+        // fuente resultaron estar desfasados frente a la carta del restaurante,
+        // así que estos están sin confirmar hasta ver su carta de alcohol.
+        pendiente: true,
         platos: [
           ['Caña', 2.5, 'De barril.', []],
           ['Pinta', 3.5, 'De barril.', []],
@@ -312,6 +331,7 @@ const MENU = [
         id: 'vinos',
         nombre: 'Vinos',
         descripcion: 'Precios por botella.',
+        pendiente: true,
         platos: [
           ['Fuente Espina', 14, 'Tinto.', []],
           ['Rioja Campo Viejo', 15, 'Tinto.', []],
@@ -333,6 +353,7 @@ const MENU = [
       {
         id: 'destilados',
         nombre: 'Destilados y licores',
+        pendiente: true,
         platos: [
           ['Absolut', 4, 'Vodka.', []],
           ['Smirnoff', 4, 'Vodka.', []],
@@ -366,22 +387,58 @@ const MENU = [
   }
 ];
 
-/* Fotografías de platos descargadas de la ficha del restaurante en Glovo.
-   Correspondencia verificada plato a plato; ver assets/images/platos/manifest.json.
-   'shared' marca una imagen que Glovo reutiliza en varios productos.
-   Se muestran agrupadas al inicio de su capítulo, no dentro de la lista. */
+/* Fotografías de plato recortadas de la carta que el restaurante publica en su
+   Instagram (destacado «OUR MENU»). Correspondencia revisada una a una sobre
+   assets/images/carta/revision.png. Origen y recorte en carta/asignacion.json.
+   Dos platos conservan su foto de Glovo porque no aparecen en esas páginas.
+   'shared' marca una imagen que la propia carta reutiliza en varios platos. */
 const PHOTOS = {
-  'Harira': { file: 'assets/images/platos/harira.webp', shared: false },
-  'Humus': { file: 'assets/images/platos/hummus.webp', shared: false },
-  'Briouates vegetarianas': { file: 'assets/images/platos/briouates-vegetarianas.webp', shared: false },
-  'Tajine de pollo con aceitunas y limón en conserva': { file: 'assets/images/platos/tajin-pollo.webp', shared: false },
-  'Tajín de cordero (jarrete)': { file: 'assets/images/platos/tajin-cordero.webp', shared: false },
-  'Tajín de dorada': { file: 'assets/images/platos/tajin-dorada.webp', shared: false },
-  'Hummus falafel': { file: 'assets/images/platos/hummus-falafel.webp', shared: false },
-  'Kibbeh': { file: 'assets/images/platos/kibbeh.webp', shared: false },
-  'Zaalouk': { file: 'assets/images/platos/zaalouk.webp', shared: false },
-  'Taktouka': { file: 'assets/images/platos/taktouka.webp', shared: false },
-  'La Mamounia mixtas': { file: 'assets/images/platos/parrilla.webp', shared: true },
-  'Pastilla fes': { file: 'assets/images/platos/pastilla-fes.webp', shared: false },
-  'Tabbouleh': { file: 'assets/images/platos/tabule.webp', shared: false }
+  "Moutabal": { file: 'assets/images/carta/moutabal.webp', shared: false },
+  "Humus": { file: 'assets/images/carta/humus.webp', shared: false },
+  "Muhammara": { file: 'assets/images/carta/muhammara.webp', shared: false },
+  "Tzatziki": { file: 'assets/images/carta/tzatziki.webp', shared: false },
+  "Labneh": { file: 'assets/images/carta/labneh.webp', shared: false },
+  "Dolma": { file: 'assets/images/carta/dolma.webp', shared: false },
+  "Falafel": { file: 'assets/images/carta/falafel.webp', shared: false },
+  "Kibbeh": { file: 'assets/images/carta/kibbeh.webp', shared: false },
+  "Fatayer sabanekh": { file: 'assets/images/carta/fatayer-sabanekh.webp', shared: false },
+  "Sambousek": { file: 'assets/images/carta/sambousek.webp', shared: false },
+  "Borek jebneh": { file: 'assets/images/carta/borek-jebneh.webp', shared: false },
+  "Batata harra": { file: 'assets/images/carta/batata-harra.webp', shared: false },
+  "Tabbouleh": { file: 'assets/images/carta/tabbouleh.webp', shared: false },
+  "Fattoush": { file: 'assets/images/carta/fattoush.webp', shared: false },
+  "Hummus falafel": { file: 'assets/images/carta/hummus-falafel.webp', shared: false },
+  "Arayes lahma": { file: 'assets/images/carta/arayes-lahma.webp', shared: false },
+  "Fórmula mezze frío y caliente": { file: 'assets/images/carta/formula-mezze-frio-y-caliente.webp', shared: false },
+  "Shawarma de pollo": { file: 'assets/images/carta/shawarma-de-pollo.webp', shared: true },
+  "Zaalouk": { file: 'assets/images/carta/zaalouk.webp', shared: false },
+  "Bekoula": { file: 'assets/images/carta/bekoula.webp', shared: false },
+  "Taktouka": { file: 'assets/images/carta/taktouka.webp', shared: false },
+  "Ensalada de zanahorias": { file: 'assets/images/carta/ensalada-de-zanahorias.webp', shared: false },
+  "Ensalada de patatas": { file: 'assets/images/carta/ensalada-de-patatas.webp', shared: false },
+  "Ensalada de remolacha": { file: 'assets/images/carta/ensalada-de-remolacha.webp', shared: false },
+  "Ensalada marroquí": { file: 'assets/images/carta/ensalada-marroqui.webp', shared: false },
+  "La Mamounia salad": { file: 'assets/images/carta/la-mamounia-salad.webp', shared: false },
+  "Briouates vegetarianas": { file: 'assets/images/carta/briouates-vegetarianas.webp', shared: false },
+  "Briouats de pollo y almendras": { file: 'assets/images/carta/briouats-de-pollo-y-almendras.webp', shared: false },
+  "Briouats de kefta y verduras": { file: 'assets/images/carta/briouats-de-kefta-y-verduras.webp', shared: false },
+  "Harira": { file: 'assets/images/carta/harira.webp', shared: false },
+  "La Mamounia mixtas": { file: 'assets/images/carta/la-mamounia-mixtas.webp', shared: false },
+  "Kefta tajine": { file: 'assets/images/carta/kefta-tajine.webp', shared: false },
+  "Tajine de kefta de sardina": { file: 'assets/images/carta/tajine-de-kefta-de-sardina.webp', shared: false },
+  "Tajine de pollo con aceitunas y limón en conserva": { file: 'assets/images/carta/tajine-de-pollo-con-aceitunas-y-limon-en-conserva.webp', shared: false },
+  "Tajine de ternera con ciruelas y albaricoques caramelizados": { file: 'assets/images/carta/tajine-de-ternera-con-ciruelas-y-albaricoques-caramelizados.webp', shared: false },
+  "Cuscús vegetariano": { file: 'assets/images/carta/cuscus-vegetariano.webp', shared: false },
+  "Cuscús tfaya": { file: 'assets/images/carta/cuscus-tfaya.webp', shared: false },
+  "Cuscús de pollo": { file: 'assets/images/carta/cuscus-de-pollo.webp', shared: false },
+  "Cuscús de ternera": { file: 'assets/images/carta/cuscus-de-ternera.webp', shared: false },
+  "Rfissa": { file: 'assets/images/carta/rfissa.webp', shared: false },
+  "Kabsa de cordero (jarrete)": { file: 'assets/images/carta/kabsa-de-cordero-jarrete.webp', shared: false },
+  "Kabsa de pollo": { file: 'assets/images/carta/kabsa-de-pollo.webp', shared: false },
+  "Tajín de cordero (jarrete)": { file: 'assets/images/carta/tajin-de-cordero-jarrete.webp', shared: false },
+  "Kunaffa": { file: 'assets/images/carta/kunaffa.webp', shared: false },
+  "Amlou cheesecake": { file: 'assets/images/carta/amlou-cheesecake.webp', shared: false },
+  "Tostada francesa con amlou y helado de vainilla": { file: 'assets/images/carta/tostada-francesa-con-amlou-y-helado-de-vainilla.webp', shared: false },
+  "Tajín de dorada": { file: 'assets/images/platos/tajin-dorada.webp', shared: false },
+  "Pastilla fes": { file: 'assets/images/platos/pastilla-fes.webp', shared: false }
 };

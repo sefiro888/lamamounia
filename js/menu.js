@@ -144,6 +144,13 @@ for (const chapter of MENU) {
       note.textContent = group.descripcion;
       block.append(note);
     }
+    // Secciones cuyos precios no se han podido cotejar con la carta del local.
+    if (group.pendiente) {
+      const aviso = document.createElement('p');
+      aviso.className = 'group-pendiente';
+      aviso.textContent = 'Precios de referencia sin confirmar: pregunta en el restaurante.';
+      block.append(aviso);
+    }
 
     for (const dish of group.platos) block.append(dishRow(dish));
     section.append(block);
