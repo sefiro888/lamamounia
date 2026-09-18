@@ -291,3 +291,54 @@ address{font-family:var(--sans)}
   .chapter-head .eyebrow:before{display:inline}
   .experience-notes article:before{font-size:2.2rem}
 }
+
+/* =====================================================================
+   RESERVA POR LLAMADA O WHATSAPP
+   Sin formulario: la web no recoge ningún dato del visitante.
+   ===================================================================== */
+.booking{padding:20px 0 80px}
+.booking-head{text-align:center;margin-bottom:38px}
+.booking-head h2{font-size:clamp(2.4rem,3.6vw,3.6rem)}
+.booking-options{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.booking-card{display:flex;align-items:center;gap:20px;padding:30px 28px;
+  background:#fffdf8;border:1px solid #e6dbc7;border-left:3px solid var(--gold);
+  box-shadow:var(--shadow-soft);transition:transform .35s,box-shadow .35s,border-color .35s}
+.booking-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lift)}
+.booking-icon{flex-shrink:0;width:62px;height:62px;display:grid;place-items:center;border-radius:50%;
+  background:var(--burgundy);color:var(--gold-light);transition:background .35s}
+.booking-body{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.booking-body strong{font-family:var(--display);font-size:1.75rem;font-weight:400;color:var(--burgundy);line-height:1.15}
+.booking-number{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:500}
+.booking-note{font-family:var(--sans);font-size:13px;color:var(--muted);line-height:1.55;margin-top:5px}
+.booking-go{flex-shrink:0;font-size:22px;color:var(--gold);align-self:flex-start}
+.booking-call:hover{border-left-color:var(--terracotta)}
+.booking-call:hover .booking-icon{background:var(--terracotta)}
+.booking-whatsapp .booking-icon{background:#1f7a52;color:#fff}
+.booking-whatsapp:hover{border-left-color:#1f7a52}
+.booking-whatsapp:hover .booking-icon{background:#25955f}
+.booking-legal{font-family:var(--sans);font-size:12.5px;color:var(--muted);line-height:1.7;
+  max-width:none;text-align:center;margin-top:28px;padding-top:22px;border-top:1px solid #e7dcc8}
+
+.contact-grid{grid-template-columns:1fr 1fr;gap:8%;padding-top:20px}
+.contact-extra .contact-block:first-child{border-top:0;margin-top:0;padding-top:0}
+.contact-extra p:not(.eyebrow):not(.small){font-family:var(--sans);font-size:14.5px;color:var(--muted)}
+.contact-extra .button{margin-top:16px}
+
+@media(max-width:800px){
+  /* El tema pisaba la regla de una columna de la hoja base. */
+  .contact-grid{grid-template-columns:1fr;gap:46px}
+  .booking-options{grid-template-columns:1fr;gap:14px}
+  .booking-card{padding:22px 20px;gap:16px}
+  .booking-body strong{font-size:1.5rem}
+  .booking-icon{width:54px;height:54px}
+  .booking{padding-bottom:56px}
+}
+@media(max-width:560px){
+  .booking-head{margin-bottom:26px}
+  .booking-card{padding:18px 16px;gap:14px}
+  .booking-icon{width:48px;height:48px}
+  .booking-icon svg{width:24px;height:24px}
+  .booking-body strong{font-size:1.35rem}
+  .booking-note{font-size:12.5px}
+  .booking-legal{font-size:12px;text-align:left}
+}

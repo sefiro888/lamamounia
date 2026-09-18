@@ -2,8 +2,8 @@
 
 > **Esto es una propuesta de diseño, no la web oficial del restaurante.**
 > No está gestionada por La Mamounia Fuengirola ni autorizada por el establecimiento.
-> El formulario de reserva es una simulación y no envía nada: para reservar de verdad
-> hay que llamar al restaurante. Los datos, precios y fotografías proceden de fichas
+> Para reservar de verdad hay que llamar al restaurante.
+> Los datos, precios y fotografías proceden de fichas
 > públicas (TheFork, Glovo, Google) y **los permisos de uso de las fotografías están
 > pendientes de confirmar con el restaurante**.
 
@@ -29,10 +29,10 @@ Abrir http://127.0.0.1:8080. También funciona abriendo index.html directamente.
 - carta.html: carta completa (142 propuestas) en seis capítulos, con índice, buscador y filtros. Ver «Tercera revisión».
 - experiencia.html: cocina, interior, terraza y ubicación.
 - galeria.html: 8 fotos, filtros y ampliación modal con cierre por Escape.
-- contacto.html: enlaces reales y formulario de demostración validado.
+- contacto.html: reserva por teléfono y WhatsApp, horarios y ubicación. Sin formulario.
 - css/styles.css: estructura, diseño responsive, focos y movimiento reducido.
 - css/theme.css: sistema visual (tipografía, ornamento, texturas). Ver «Cuarta revisión».
-- js/script.js: menú móvil, galería y formulario.
+- js/script.js: menú móvil, galería, avisos, estado de apertura y arcos SVG.
 - js/menu-data.js: la carta entera, editable sin compilación.
 - js/menu.js: render, buscador, filtros y scroll-spy de la carta.
 - assets/images/: fotografías locales y SOURCES.md con procedencia.
@@ -64,7 +64,7 @@ Consulta realizada el 18/09/2026. La información cambia y no se sincroniza auto
 - TODO: validar licencia/autoría de las fotografías con el restaurante antes de publicación comercial. Proceden de su ficha pública de TheFork; no se afirma autoría oficial. No se usaron Unsplash, Pexels, imágenes generadas ni fotografías de otros restaurantes. Si no se obtiene autorización, sustituir estas ocho fotos por material autorizado.
 - TODO: completar galería con fotos autorizadas de terraza, té, especias y ambiente nocturno. No se han usado sustitutos inventados.
 - Nota Google verificada directamente: 4,8/5 y 622 reseñas, consultada el 18/09/2026. El precio por persona de 20–30 € en Google es aportado por clientes; no se presenta como tarifa fija.
-- No se inventa email. No se incluye analítica, cookies ni almacenamiento del formulario.
+- No se inventa email. No se incluye analítica ni cookies. La web no recoge ningún dato del visitante.
 - Formulario local: no transmite ni guarda datos; el éxito es una simulación explícita. Para reservas reales se necesita backend, política de privacidad y confirmación de disponibilidad.
 
 ## Validación
@@ -85,7 +85,7 @@ Consulta realizada el 18/09/2026. La información cambia y no se sincroniza auto
 
 Técnicamente preparada para alojamiento estático y subdirectorios: rutas relativas, archivos locales y .nojekyll; no necesita build. No se ha publicado ni creado repositorio remoto.
 
-Publicar los cinco HTML, css/, js/, assets/, logo.jpg y .nojekyll en la raíz del repositorio; activar Settings > Pages > Deploy from a branch, seleccionando la rama y /(root). Excluir backups y auxiliares. Resolver antes los permisos de fotografía y revisar los datos pendientes si va a presentarse como web oficial. El formulario seguirá siendo demo hasta incorporar un backend.
+Publicar los cinco HTML, css/, js/, assets/, logo.jpg y .nojekyll en la raíz del repositorio; activar Settings > Pages > Deploy from a branch, seleccionando la rama y /(root). Excluir backups y auxiliares. Resolver antes los permisos de fotografía y revisar los datos pendientes si va a presentarse como web oficial.
 
 ## Segunda revisión — web más viva
 
@@ -149,7 +149,7 @@ La marca ✿ se deduce de los ingredientes que aparecen en la descripción publi
 - **Rendimiento**: las ocho fotos de ambiente siguen en JPG sin optimizar (unos 2 MB en total). Convertirlas a WebP con tamaños responsive está pendiente.
 - **Versión en inglés**: no existe. Con el público extranjero de Fuengirola es probablemente la mejora con más retorno que queda por hacer.
 - **Horario**: el indicador de abierto/cerrado usa el de Google (14:00–01:00, martes cerrado) y lo cita como tal, porque Instagram publica otro distinto. Confirmar con el restaurante y actualizar `HOURS`.
-- El formulario de contacto sigue siendo una simulación sin backend.
+- Confirmar que el número atiende WhatsApp: es uno de los dos canales de reserva de la web.
 
 ### Validación de esta revisión
 
@@ -219,3 +219,32 @@ Estrella de ocho puntas (*khatam*) construida como SVG embebido en el CSS, sin a
 - `optimize-images.py`: regenera los WebP y deja los HTML como están si ya tienen `srcset`. Ejecutarlo después de añadir fotos nuevas.
 
 Siguen sin ejecutarse `build-site.py`, `refresh-site.py`, `integrate-glovo.py` y `document-refresh.py`: regenerarían páginas obsoletas.
+
+## Quinta revisión — reserva sin formulario (18/09/2026)
+
+El formulario de reserva se retira por completo. Era una simulación: validaba los campos y mostraba un mensaje de éxito, pero no enviaba nada a ninguna parte, así que prometía algo que no hacía.
+
+**La reserva es ahora por teléfono o WhatsApp**, con dos tarjetas grandes en `contacto.html#reservar`. El enlace de WhatsApp abre la conversación con el mensaje ya escrito y los huecos a rellenar:
+
+```
+Hola, me gustaría reservar una mesa en La Mamounia.
+
+Personas:
+Día:
+Hora:
+Nombre:
+```
+
+Ese mismo enlace es el que usa el botón de WhatsApp de la barra móvil en las cinco páginas.
+
+Consecuencias:
+
+- **La web ya no tiene ningún campo de entrada**: ni un `<form>`, ni un `<input>`. No recoge, no envía y no guarda nada de quien la visita, así que no hacen falta política de privacidad, consentimiento ni backend.
+- Se retira el código del formulario de `js/script.js`.
+- Se retira OpenTable como canal de reserva: sobraba teniendo teléfono y WhatsApp, y daba una vía contradictoria.
+- `schema.org` declara `acceptsReservations`.
+- Se reorganiza la página con los horarios, los encargos para grupos y el enlace a Glovo.
+
+Corregido de paso: `css/theme.css` pisaba la regla de una sola columna de la hoja base y la página de contacto se desbordaba a 375 px.
+
+**Pendiente**: confirmar que el número atiende WhatsApp. Es uno de los dos únicos canales de reserva, y la página lo advierte mientras no esté confirmado.
