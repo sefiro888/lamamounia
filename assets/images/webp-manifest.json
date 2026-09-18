@@ -1,0 +1,92 @@
+{
+  "cuscus": {
+    "jpg_bytes": 296155,
+    "webp": [
+      {
+        "ancho": 640,
+        "file": "assets/images/cuscus-640.webp",
+        "bytes": 95978
+      },
+      {
+        "ancho": 1024,
+        "file": "assets/images/cuscus-1024.webp",
+        "bytes": 167194
+      }
+    ]
+  },
+  "dulces": {
+    "jpg_bytes": 246123,
+    "webp": [
+      {
+        "ancho": 640,
+        "file": "assets/images/dulces-640.webp",
+        "bytes": 79928
+      }
+    ]
+  },
+  "interior": {
+    "jpg_bytes": 302968,
+    "webp": [
+      {
+        "ancho": 640,
+        "file": "assets/images/interior-640.webp",
+        "bytes": 110276
+      }
+    ]
+  },
+  "mar": {
+    "jpg_bytes": 79932,
+    "webp": [
+      {
+        "ancho": 640,
+        "file": "assets/images/mar-640.webp",
+        "bytes": 22382
+      }
+    ]
+  },
+  "mesa": {
+    "jpg_bytes": 233211,
+    "webp": [
+      {
+        "ancho": 640,
+        "file": "assets/images/mesa-640.webp",
+        "bytes": 78232
+      }
+    ]
+  },
+  "mezze": {
+    "jpg_bytes": 233693,
+    "webp": [
+      {
+        "ancho": 640,
+        "file": "assets/images/mezze-640.webp",
+        "bytes": 81316
+      }
+    ]
+  },
+  "sala": {
+    "jpg_bytes": 195790,
+    "webp": [
+      {
+        "ancho": 640,
+        "file": "assets/images/sala-640.webp",
+        "bytes": 64796
+      }
+    ]
+  },
+  "tajines": {
+    "jpg_bytes": 318640,
+    "webp": [
+      {
+        "ancho": 640,
+        "file": "assets/images/tajines-640.webp",
+        "bytes": 102504
+      },
+      {
+        "ancho": 1024,
+        "file": "assets/images/tajines-1024.webp",
+        "bytes": 175842
+      }
+    ]
+  }
+}

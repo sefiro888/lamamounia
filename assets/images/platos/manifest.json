@@ -1,0 +1,67 @@
+{
+  "Harira": {
+    "file": "assets/images/platos/harira.webp",
+    "source": "https://glovo.dhmedia.io/image/menus-glovo/products/93a23365c8a6f630bb61d14859aa82f3607f735e891ef94c42bc1eb53b3d6de0?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Hummus": {
+    "file": "assets/images/platos/hummus.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610239/75a9710d-bc57-49b9-a218-6aa0f92d6d86.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Briouates vegetarianas": {
+    "file": "assets/images/platos/briouates-vegetarianas.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610253/d1261124-7303-4f39-989c-263a946b88fb.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Tajín de pollo": {
+    "file": "assets/images/platos/tajin-pollo.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610220/9b113e5b-dc98-4b52-8972-38cda0688d5f.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Tajín de cordero": {
+    "file": "assets/images/platos/tajin-cordero.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610226/688a5924-41df-4ce2-8830-b32057621264.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Tajín de dorada": {
+    "file": "assets/images/platos/tajin-dorada.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610227/8e37831a-b60b-47b6-bf9a-0a40a1069890.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Hummus falafel": {
+    "file": "assets/images/platos/hummus-falafel.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610235/432f051b-a70d-4768-b339-281cf97d77c0.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Kibbeh": {
+    "file": "assets/images/platos/kibbeh.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610205/45ed6614-709c-455c-9846-73f22e62be5a.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Zaalouk": {
+    "file": "assets/images/platos/zaalouk.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610210/1893ecdb-cb25-4da4-9e21-4c40feb30adb.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Taktouka": {
+    "file": "assets/images/platos/taktouka.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610212/e555836c-2116-46c3-8130-6806082d3820.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "La Mamounia mixtas": {
+    "file": "assets/images/platos/parrilla.webp",
+    "source": "https://glovo.dhmedia.io/image/menus-glovo/products/d5c39cd72bd9a4d3372f3333bfe7baacca9352fa66de790c5f06743516e643ba?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": true
+  },
+  "Pastilla Fes": {
+    "file": "assets/images/platos/pastilla-fes.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610192/b2ffea84-3c21-4e81-956a-5f1f3f8eba3c.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  },
+  "Tabulé": {
+    "file": "assets/images/platos/tabule.webp",
+    "source": "https://glovo.dhmedia.io/image/global-menu-service/GV_ES/vendor/885654/product/41937610233/262ad6c2-c4e2-4e7d-b338-f4708cd69f67.jpg?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MzIwLCJoZWlnaHQiOjMyMH19LHsid2VicCI6e319XQ%3D%3D",
+    "shared": false
+  }
+}

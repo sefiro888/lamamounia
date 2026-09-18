@@ -1,0 +1,56 @@
+{
+  "cormorant-garamond-400": {
+    "family": "Cormorant Garamond",
+    "weight": "400",
+    "style": "normal",
+    "file": "assets/fonts/cormorant-garamond-400.woff2",
+    "bytes": 22876,
+    "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_v86KnTOig.woff2",
+    "license": "SIL Open Font License 1.1"
+  },
+  "cormorant-garamond-600": {
+    "family": "Cormorant Garamond",
+    "weight": "600",
+    "style": "normal",
+    "file": "assets/fonts/cormorant-garamond-600.woff2",
+    "bytes": 23396,
+    "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_iE9KnTOig.woff2",
+    "license": "SIL Open Font License 1.1"
+  },
+  "cormorant-garamond-400-italic": {
+    "family": "Cormorant Garamond",
+    "weight": "400",
+    "style": "italic",
+    "file": "assets/fonts/cormorant-garamond-400-italic.woff2",
+    "bytes": 23660,
+    "source": "https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jD-iNM8.woff2",
+    "license": "SIL Open Font License 1.1"
+  },
+  "jost-400": {
+    "family": "Jost",
+    "weight": "400",
+    "style": "normal",
+    "file": "assets/fonts/jost-400.woff2",
+    "bytes": 9404,
+    "source": "https://fonts.gstatic.com/s/jost/v20/92zPtBhPNqw79Ij1E865zBUv7myjJTVBNIg.woff2",
+    "license": "SIL Open Font License 1.1"
+  },
+  "jost-500": {
+    "family": "Jost",
+    "weight": "500",
+    "style": "normal",
+    "file": "assets/fonts/jost-500.woff2",
+    "bytes": 10476,
+    "source": "https://fonts.gstatic.com/s/jost/v20/92zPtBhPNqw79Ij1E865zBUv7myRJTVBNIg.woff2",
+    "license": "SIL Open Font License 1.1"
+  },
+  "jost-600": {
+    "family": "Jost",
+    "weight": "600",
+    "style": "normal",
+    "file": "assets/fonts/jost-600.woff2",
+    "bytes": 10480,
+    "source": "https://fonts.gstatic.com/s/jost/v20/92zPtBhPNqw79Ij1E865zBUv7mx9IjVBNIg.woff2",
+    "license": "SIL Open Font License 1.1"
+  }
+}

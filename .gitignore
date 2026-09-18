@@ -1,0 +1,13 @@
+backups/
+__pycache__/
+*.log
+build-site.py
+download-assets.py
+check-site.py
+
+refresh-site.py
+
+glovo-source.html
+import-glovo.py
+document-refresh.py
+integrate-glovo.py
