@@ -342,3 +342,99 @@ address{font-family:var(--sans)}
   .booking-note{font-size:12.5px}
   .booking-legal{font-size:12px;text-align:left}
 }
+
+/* =====================================================================
+   BANNER DE AVISOS — con vida
+   Tres capas de movimiento: el mosaico que se desplaza, un brillo que
+   recorre el dorado y la entrada de cada aviso. Todo se detiene con
+   prefers-reduced-motion y al pausar el carrusel.
+   ===================================================================== */
+.announcement{
+  position:relative;overflow:hidden;min-height:56px;
+  background:linear-gradient(100deg,#9c7833 0%,#c9a055 28%,#e2c383 50%,#c9a055 72%,#9c7833 100%);
+  color:#2a1c0c;
+  box-shadow:inset 0 -1px 0 #00000026,inset 0 1px 0 #ffffff33;
+}
+/* Capa 1: mosaico de estrellas desplazándose muy despacio */
+.announcement:before{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%232a1c0c' stroke-width='1' opacity='.16'%3E%3Crect x='14' y='14' width='20' height='20'/%3E%3Crect x='14' y='14' width='20' height='20' transform='rotate(45 24 24)'/%3E%3C/g%3E%3C/svg%3E");
+  animation:banner-drift 60s linear infinite;
+}
+/* Capa 2: brillo que recorre el dorado */
+.announcement:after{
+  content:'';position:absolute;top:0;bottom:0;left:-50%;width:45%;pointer-events:none;
+  background:linear-gradient(100deg,transparent,#fff5dd8c 45%,#fffaf0b3 50%,#fff5dd8c 55%,transparent);
+  animation:banner-shine 7s ease-in-out infinite;
+}
+@keyframes banner-drift{to{background-position:48px 0}}
+@keyframes banner-shine{0%{left:-50%}55%,100%{left:105%}}
+
+.announcement-label{
+  position:relative;z-index:2;font-size:9.5px;letter-spacing:.24em;font-weight:600;
+  color:#4a3212;padding:5px 11px;border:1px solid #2a1c0c2e;border-radius:20px;background:#fff3d94d
+}
+
+.announcement>a{
+  position:relative;z-index:2;display:flex;align-items:center;justify-content:center;
+  gap:11px;flex-wrap:wrap;line-height:1.45;padding:4px 0
+}
+.announcement-icon{width:21px;height:21px;flex-shrink:0;fill:none;stroke:#4a3212;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.announcement>a strong{font-weight:600;letter-spacing:.005em}
+.announcement-text{opacity:.82}
+.announcement-arrow{
+  display:inline-grid;place-items:center;width:23px;height:23px;border-radius:50%;
+  background:#2a1c0c;color:#e8c98a;font-size:12px;flex-shrink:0;transition:transform .3s,background .3s
+}
+.announcement>a:hover .announcement-arrow{transform:translate(2px,-2px);background:#572b2d}
+.announcement>a:hover strong{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+
+/* Entrada de cada aviso: sube y aparece, con el icono un pelín después */
+.announcement>a.is-entering{animation:aviso-entra .5s cubic-bezier(.22,1,.36,1) both}
+.announcement>a.is-entering .announcement-icon{animation:icono-entra .55s cubic-bezier(.34,1.4,.5,1) .06s both}
+@keyframes aviso-entra{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes icono-entra{from{opacity:0;transform:scale(.4) rotate(-14deg)}to{opacity:1;transform:none}}
+
+/* Capa 3: barra de tiempo hasta el aviso siguiente */
+.announcement-progress{position:absolute;left:0;bottom:0;height:2px;width:0;z-index:3;
+  background:linear-gradient(90deg,#fff2d6,#5c3d14);border-radius:0 2px 2px 0}
+.announcement-progress.is-running{animation:banner-progreso 7s linear both}
+@keyframes banner-progreso{from{width:0}to{width:100%}}
+
+/* Con el carrusel detenido (pausa, ratón encima o foco) todo se congela */
+.announcement.is-paused:before,
+.announcement.is-paused:after,
+.announcement.is-paused .announcement-progress{animation-play-state:paused}
+
+.announcement-controls{position:relative;z-index:2}
+.announcement-controls button{color:#3c2810;border-radius:50%;transition:background .25s,transform .25s}
+.announcement-controls button:hover{background:#fff3d980;transform:scale(1.08)}
+.announcement-count{font-size:9.5px;letter-spacing:.1em;opacity:.7}
+.announcement a:focus-visible,.announcement button:focus-visible{outline-color:#2a1c0c}
+
+@media(max-width:900px){
+  .announcement>a{gap:8px}
+  .announcement-icon{width:19px;height:19px}
+}
+@media(max-width:560px){
+  .announcement{min-height:76px}
+  /* En móvil, rejilla explícita: con flex el título y el texto competían por
+     la misma línea y la flecha caía suelta debajo.
+       [icono] [título] [flecha]
+               [texto secundario]  */
+  .announcement>a{display:grid;grid-template-columns:auto minmax(0,1fr) auto;
+    grid-template-areas:'icono titulo flecha' '. texto .';
+    align-items:center;column-gap:9px;row-gap:1px;text-align:left}
+  .announcement-icon{grid-area:icono}
+  .announcement>a strong{grid-area:titulo;min-width:0}
+  .announcement-text{grid-area:texto;font-size:11px;line-height:1.4}
+  .announcement-arrow{grid-area:flecha}
+  .announcement-icon{width:20px;height:20px}
+  .announcement-arrow{width:20px;height:20px;font-size:11px}
+  .announcement:after{width:70%}
+}
+/* Sin movimiento: se ve exactamente igual, pero quieto. */
+@media(prefers-reduced-motion:reduce){
+  .announcement:before,.announcement:after{animation:none;display:none}
+  .announcement-progress{display:none}
+}

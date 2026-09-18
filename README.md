@@ -248,3 +248,19 @@ Consecuencias:
 Corregido de paso: `css/theme.css` pisaba la regla de una sola columna de la hoja base y la página de contacto se desbordaba a 375 px.
 
 **Pendiente**: confirmar que el número atiende WhatsApp. Es uno de los dos únicos canales de reserva, y la página lo advierte mientras no esté confirmado.
+
+## Sexta revisión — banner de avisos con movimiento (18/09/2026)
+
+El banner dorado cambiaba de aviso de golpe, sin transición, sobre un dorado plano. Ahora tiene tres capas de movimiento, y vuelve a estar en las cinco páginas (faltaba en la carta desde que se rehizo).
+
+1. **Fondo**: degradado dorado en cinco paradas, un mosaico de estrellas que se desplaza en un ciclo de 60 s y un brillo que recorre la banda cada 7 s.
+2. **Cada aviso entra animado**: sube y aparece, y su icono entra un pelín después con un rebote corto. Cada aviso tiene su propio icono dibujado en SVG — tajine, nota musical y carta —, definidos en `ICONS` dentro de `js/script.js`.
+3. **Barra de tiempo** en el borde inferior que se rellena en los 7 s que dura cada aviso, así se ve cuándo va a cambiar.
+
+El tercer aviso pasa a anunciar la carta completa («142 platos de Marruecos y Líbano») en vez de enlazar a TheFork.
+
+**Control y accesibilidad**: al pausar, pasar el ratón por encima, mover el foco dentro del banner o dejar la pestaña en segundo plano, se añade la clase `is-paused` y **las animaciones se congelan donde estén** con `animation-play-state`, en lugar de reiniciarse. Con `prefers-reduced-motion` no hay movimiento de ninguna clase: ni mosaico, ni brillo, ni barra de tiempo; el banner se ve igual, pero quieto.
+
+En móvil el banner usa una rejilla explícita de dos filas — `[icono] [título] [flecha]` sobre `[texto]` — porque con flex el título y el texto competían por la misma línea y la flecha caía suelta en una tercera.
+
+Los avisos se siguen editando en el array `notices` de `js/script.js`. La duración está en la constante `DURACION` y debe coincidir con los 7 s de las animaciones `banner-shine` y `banner-progreso` de `css/theme.css`.

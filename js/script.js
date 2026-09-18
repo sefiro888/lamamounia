@@ -12,18 +12,69 @@ if(dialog){document.querySelectorAll('.gallery-open').forEach(button=>button.add
    así que la web no recoge ningún dato personal. */
 
 // Avisos editables: contenido contrastado en Instagram y Google el 18/09/2026.
+// Cada aviso lleva su icono. Para añadir uno nuevo basta con otra entrada aquí.
 const announcement=document.querySelector('.announcement');
 if(announcement){
+ const ICONS={
+  encargo:'<path d="M12 3.2 18.5 16h-13z"/><path d="M3 18.5h18"/><circle cx="12" cy="2" r="1.1"/>',
+  musica:'<path d="M9 17.5V5.2l10-2v12.1"/><circle cx="6.4" cy="17.8" r="2.6"/><circle cx="16.4" cy="15.3" r="2.6"/>',
+  carta:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8.5h6M9 12h6M9 15.5h3.5"/>'
+ };
  const notices=[
-  {title:'Tu celebración, con sabor marroquí.',text:'Platos por encargo para compartir.',url:'index.html#encargos'},
-  {title:'Música en directo en La Mamounia.',text:'Consulta las próximas fechas.',url:'index.html#noches'},
-  {title:'Tu próxima mesa, junto al mar.',text:'Descubre la carta completa.',url:'https://www.thefork.es/restaurante/la-mamounia-fuengirola-r844690/menu'}
+  {icon:'encargo',title:'Tu celebración, con sabor marroquí.',text:'Platos por encargo para compartir.',url:'index.html#encargos'},
+  {icon:'musica',title:'Música en directo en La Mamounia.',text:'Consulta las próximas fechas.',url:'index.html#noches'},
+  {icon:'carta',title:'142 platos de Marruecos y Líbano.',text:'Descubre la carta completa.',url:'carta.html'}
  ];
- let current=0,timer=null,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const DURACION=7000;
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+ let current=0,timer=null,paused=reduce.matches;
  const link=announcement.querySelector('#announcement-link'),pause=announcement.querySelector('.announcement-pause');
- function paintNotice(){const item=notices[current];link.replaceChildren();const title=document.createElement('strong');title.textContent=item.title;const arrow=document.createElement('span');arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');link.append(title,document.createTextNode(' '+item.text+' '),arrow);link.href=item.url;link.target=item.url.startsWith('https:')?'_blank':'_self';link.rel='noopener';announcement.querySelector('.announcement-count').textContent=`${current+1} / ${notices.length}`}
- function stopNotices(){clearInterval(timer);timer=null}
- function startNotices(){stopNotices();if(!paused&&!document.hidden&&!announcement.hidden)timer=setInterval(()=>{current=(current+1)%notices.length;paintNotice()},8500)}
+
+ // Barra de tiempo: se inyecta aquí para no repetirla en las cinco páginas.
+ const progress=document.createElement('span');
+ progress.className='announcement-progress';
+ progress.setAttribute('aria-hidden','true');
+ announcement.append(progress);
+
+ function paintNotice(){
+  const item=notices[current];
+  link.replaceChildren();
+  const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  icon.setAttribute('class','announcement-icon');
+  icon.setAttribute('viewBox','0 0 24 24');
+  icon.setAttribute('aria-hidden','true');
+  icon.innerHTML=ICONS[item.icon];
+  const title=document.createElement('strong');
+  title.textContent=item.title;
+  const text=document.createElement('span');
+  text.className='announcement-text';
+  text.textContent=item.text;
+  const arrow=document.createElement('span');
+  arrow.className='announcement-arrow';
+  arrow.textContent='↗';
+  arrow.setAttribute('aria-hidden','true');
+  link.append(icon,title,text,arrow);
+  link.href=item.url;
+  link.target=item.url.startsWith('https:')?'_blank':'_self';
+  link.rel='noopener';
+  announcement.querySelector('.announcement-count').textContent=`${current+1} / ${notices.length}`;
+  // Reinicia la animación de entrada y la barra de tiempo.
+  link.classList.remove('is-entering');
+  progress.classList.remove('is-running');
+  void link.offsetWidth;
+  link.classList.add('is-entering');
+  if(!paused)progress.classList.add('is-running');
+ }
+ // Al parar se congelan las animaciones en su sitio en vez de reiniciarlas,
+ // para que la barra de tiempo no siga corriendo con el carrusel detenido.
+ function stopNotices(){clearInterval(timer);timer=null;announcement.classList.add('is-paused')}
+ function startNotices(){
+  clearInterval(timer);timer=null;
+  if(paused||document.hidden||announcement.hidden){announcement.classList.add('is-paused');return}
+  announcement.classList.remove('is-paused');
+  progress.classList.remove('is-running');void progress.offsetWidth;progress.classList.add('is-running');
+  timer=setInterval(()=>{current=(current+1)%notices.length;paintNotice()},DURACION);
+ }
  function paintPause(){pause.textContent=paused?'▷':'Ⅱ';pause.setAttribute('aria-label',paused?'Reanudar avisos automáticos':'Pausar avisos automáticos')}
  function manualNotice(step){current=(current+step+notices.length)%notices.length;paused=true;stopNotices();paintNotice();paintPause()}
  announcement.querySelector('.announcement-prev').addEventListener('click',()=>manualNotice(-1));
@@ -33,8 +84,8 @@ if(announcement){
  announcement.addEventListener('mouseenter',stopNotices);announcement.addEventListener('mouseleave',()=>{if(!announcement.contains(document.activeElement))startNotices()});
  announcement.addEventListener('focusin',stopNotices);announcement.addEventListener('focusout',e=>{if(!announcement.contains(e.relatedTarget))startNotices()});
  document.addEventListener('visibilitychange',()=>document.hidden?stopNotices():startNotices());
- matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',e=>{if(e.matches){paused=true;stopNotices();paintPause()}});
- paintPause();startNotices();
+ reduce.addEventListener('change',e=>{if(e.matches){paused=true;stopNotices();paintPause()}});
+ paintPause();paintNotice();startNotices();
 }
 const scenes={interior:{image:'interior',alt:'Mosaicos, arco decorativo y sillas turquesa de La Mamounia'},tajines:{image:'tajines',alt:'Tajines en la vajilla de La Mamounia'},sala:{image:'sala',alt:'Lámparas y decoración del salón de La Mamounia'}};
 document.querySelectorAll('[data-scene]').forEach(button=>button.addEventListener('click',()=>{const scene=scenes[button.dataset.scene];const img=document.querySelector('.hero-image');img.src=`assets/images/${scene.image}.jpg`;img.alt=scene.alt;img.classList.remove('scene-enter');requestAnimationFrame(()=>img.classList.add('scene-enter'));document.querySelectorAll('[data-scene]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)))}));
