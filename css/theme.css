@@ -442,3 +442,96 @@ address{font-family:var(--sans)}
 /* Aviso de precios sin cotejar con la carta del local */
 .group-pendiente{font-family:var(--sans);font-size:12px;color:#8a6a24;background:#f8f1e2;
   border-left:2px solid var(--gold);padding:8px 12px;margin-top:10px;max-width:none}
+
+/* =====================================================================
+   MENÚ DE NAVEGACIÓN
+   La regla de la textura (body>*{z-index:1}) empataba en especificidad con
+   header{z-index:20} y, al cargarse después, ganaba: el contenido de la
+   página tapaba el menú desplegado. Se le devuelve la prioridad.
+   ===================================================================== */
+body>header{z-index:60}
+body>.utility-bar,body>.announcement{z-index:40}
+
+.menu-toggle{position:relative;z-index:70;gap:12px;color:var(--burgundy);
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.menu-toggle span{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;
+  border:1px solid #e0d3bc;background:#fffdf8;font-size:17px;transition:background .3s,border-color .3s,transform .3s}
+.menu-toggle:hover span{border-color:var(--gold);background:var(--gold-pale)}
+/* Con el panel abierto, el botón queda sobre el granate: se invierte para
+   que siga leyéndose (el panel es hijo de la cabecera y la cubre). */
+.menu-toggle[aria-expanded=true]{color:#f6efe1}
+.menu-toggle[aria-expanded=true] span{background:var(--gold-light);border-color:var(--gold-light);
+  color:var(--burgundy-ink);transform:rotate(90deg)}
+
+@media(max-width:800px){
+  /* Panel a pantalla completa, por encima de todo */
+  #navigation{
+    display:flex;position:fixed;inset:0;top:0;z-index:55;
+    flex-direction:column;justify-content:flex-start;gap:0;
+    padding:var(--nav-top,140px) 8% 30px;border:0;
+    background:radial-gradient(ellipse at 75% 8%,#6b3639,#3a1c1f 62%);
+    background-color:#3a1c1f;
+    opacity:0;visibility:hidden;transform:translateY(-12px);
+    transition:opacity .34s ease,transform .38s cubic-bezier(.22,1,.36,1),visibility .34s;
+    overflow-y:auto;overscroll-behavior:contain;
+  }
+  #navigation:before{
+    content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='40'%20height='40'%20viewBox='0%200%2040%2040'%3E%3Cg%20opacity='.07'%3E%3Crect%20x='3.5'%20y='3.5'%20width='33'%20height='33'%20fill='%23e1b45f'/%3E%3Crect%20x='3.5'%20y='3.5'%20width='33'%20height='33'%20fill='%23e1b45f'%20transform='rotate(45%2020%2020)'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  #navigation.open{opacity:1;visibility:visible;transform:none}
+  body.nav-abierto{overflow:hidden}
+
+  #navigation a{
+    position:relative;display:flex;align-items:baseline;gap:16px;
+    font-family:var(--display);font-size:2.5rem;font-weight:400;letter-spacing:-.02em;
+    text-transform:none;color:#f6efe1;padding:13px 0;border-bottom:1px solid #ffffff14;
+    opacity:0;transform:translateY(14px);
+  }
+  #navigation.open a{animation:nav-entra .45s cubic-bezier(.22,1,.36,1) forwards}
+  #navigation.open a:nth-of-type(1){animation-delay:.05s}
+  #navigation.open a:nth-of-type(2){animation-delay:.1s}
+  #navigation.open a:nth-of-type(3){animation-delay:.15s}
+  #navigation.open a:nth-of-type(4){animation-delay:.2s}
+  #navigation.open a:nth-of-type(5){animation-delay:.25s}
+  #navigation a:after{display:none}
+  #navigation a[aria-current=page]{color:var(--gold-light)}
+  #navigation a[aria-current=page]:before{content:'';position:absolute;left:-16px;top:50%;
+    width:5px;height:5px;border-radius:50%;background:var(--gold);transform:translateY(-50%)}
+  .nav-num{font-family:var(--sans);font-size:11px;letter-spacing:.18em;color:var(--gold);opacity:.85;flex-shrink:0}
+
+  .nav-marca{position:absolute;top:var(--marca-top,34px);left:8%;font-family:var(--display);font-size:1.5rem;
+    color:var(--gold-light);letter-spacing:.01em;opacity:0}
+  #navigation.open .nav-marca{animation:nav-entra .45s ease .02s forwards}
+  .nav-foot{margin-top:34px;display:flex;flex-direction:column;gap:14px;opacity:0}
+  #navigation.open .nav-foot{animation:nav-entra .5s cubic-bezier(.22,1,.36,1) .32s forwards}
+  .nav-call{font-family:var(--display)!important;font-size:2rem!important;color:var(--gold-light)!important;
+    padding:0!important;border:0!important;display:inline-block!important}
+  .nav-wa{font-family:var(--sans)!important;font-size:13px!important;letter-spacing:.06em;
+    color:#f6efe1!important;padding:13px 20px!important;border:1px solid #ffffff33!important;
+    border-radius:30px;align-self:flex-start;display:inline-block!important}
+  .nav-wa:hover{background:#ffffff14}
+  .nav-place{font-family:var(--sans);font-size:11.5px;letter-spacing:.06em;color:#c8b3a4;line-height:1.6}
+}
+@keyframes nav-entra{to{opacity:1;transform:none}}
+
+@media(max-width:560px){
+  #navigation{padding:var(--nav-top,130px) 7% 26px}
+  .nav-marca{left:7%}
+  #navigation a{font-size:2.1rem;padding:11px 0;gap:13px}
+  .nav-call{font-size:1.75rem!important}
+  .nav-foot{margin-top:26px}
+}
+/* Sin animación de entrada para quien prefiere no verla */
+@media(prefers-reduced-motion:reduce){
+  #navigation,#navigation a,#navigation .nav-foot{transition:none;animation:none;opacity:1;transform:none}
+  #navigation{visibility:hidden}
+  #navigation.open{visibility:visible}
+}
+
+/* Los añadidos del panel móvil no pintan nada en el menú horizontal */
+@media(min-width:801px){
+  .nav-num,.nav-foot,.nav-marca{display:none}
+  #navigation{position:static;opacity:1;visibility:visible;transform:none;background:none;padding:0}
+  #navigation:before{display:none}
+}

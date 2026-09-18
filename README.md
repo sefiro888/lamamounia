@@ -314,3 +314,40 @@ Sólo dos platos conservan su foto de Glovo: Tajín de dorada y Pastilla fes.
 ### Nota sobre los auxiliares
 
 `make-zellige.py`, `extract-photos.py` y `assign-photos.py` son reejecutables y están documentados, pero se excluyen del repositorio junto con las capturas y los recortes intermedios: son material de trabajo, no del sitio. Los WebP finales y los JSON de trazabilidad sí se publican.
+
+## Octava revisión — menú de navegación, escenas del hero y sello (18/09/2026)
+
+### El menú de navegación no se abría
+
+En móvil el panel se marcaba como abierto pero no se veía. La causa estaba en el propio tema: la regla `body>*{position:relative;z-index:1}`, añadida para la textura de fondo, **empata en especificidad con `header{z-index:20}`** y, al cargarse `theme.css` después, ganaba. Con header y main al mismo nivel, el contenido de la página tapaba el menú.
+
+Se le devuelve la prioridad a la cabecera (`body>header{z-index:60}`) y **el menú móvil se rehace por completo**:
+
+- Panel a pantalla completa, granate con mosaico, que entra con una transición.
+- Enlaces grandes en Cormorant, numerados 01–05, apareciendo escalonadamente.
+- Pie con teléfono, botón de reserva por WhatsApp y dirección: lo que se busca al abrir el menú de un restaurante.
+- El botón pasa de «Menú ☰» a «Cerrar ✕» y se invierte a dorado para leerse sobre el granate.
+- Se bloquea el desplazamiento del fondo mientras está abierto; se cierra con Escape, al pulsar un enlace o al pasar a escritorio.
+
+El panel es hijo de `<header>`, así que lo cubre desde dentro y el logo deja de verse: por eso el propio panel lleva el nombre del restaurante arriba. Su posición **se calcula desde la del botón** (`--nav-top`, `--marca-top`) en lugar de con medidas fijas, porque la cabecera cambia de alto según el banner de avisos esté abierto o cerrado.
+
+En escritorio, los añadidos del panel (números, pie y marca) se ocultan y el menú vuelve a ser la barra horizontal de siempre.
+
+### Las tres escenas del hero mostraban la misma foto
+
+«El lugar», «La cocina» y «El ambiente» cambiaban el `src` de la imagen, pero **al pasar las fotos a WebP se añadió un `srcset` que el navegador prioriza**, así que la imagen nunca cambiaba. Ahora se actualizan ambos, y cada escena usa una foto acorde: la fachada con mosaicos, los tajines y el salón.
+
+### El sello del logo
+
+Se retira del hero: en móvil tapaba justo el centro de la fotografía.
+
+### Aviso de caché
+
+`js/script.js` se enlazaba **sin número de versión**, así que los navegadores servían la copia antigua y los cambios no se veían. Ahora va versionado como el resto (`?v=nav-3`). Al tocar JS o CSS hay que subir ese número en las cinco páginas.
+
+### Validación
+
+- Menú probado en las cinco páginas a 375 px: abre, cierra, bloquea el fondo, marca la página actual y no se solapa con el botón.
+- A 1200 px: barra horizontal, sin rastro de los elementos del panel, sin desbordamiento.
+- Las tres escenas del hero cargan tres archivos distintos, comprobado con `currentSrc`.
+- Consola sin errores.

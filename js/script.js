@@ -1,11 +1,83 @@
 'use strict';
-const toggle=document.querySelector('.menu-toggle');
-const nav=document.querySelector('#navigation');
-function closeMenu(){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}
-toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open)});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){closeMenu();toggle.focus()}});
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
-window.matchMedia('(min-width:801px)').addEventListener('change',closeMenu);
+/* ---------------------------------------------------------------------------
+   MENÚ DE NAVEGACIÓN MÓVIL
+   Panel a pantalla completa. Se enriquece desde aquí (números y pie de
+   contacto) para no repetir el mismo bloque en las cinco páginas.
+--------------------------------------------------------------------------- */
+{
+  const nav = document.querySelector('#navigation');
+  const toggle = document.querySelector('.menu-toggle');
+  const enlaces = [...nav.querySelectorAll('a')];
+
+  // Numeración discreta, como en la carta.
+  enlaces.forEach((a, i) => {
+    if (a.querySelector('.nav-num')) return;
+    const num = document.createElement('span');
+    num.className = 'nav-num';
+    num.setAttribute('aria-hidden', 'true');
+    num.textContent = String(i + 1).padStart(2, '0');
+    a.prepend(num);
+  });
+
+  // Pie del panel: lo que alguien busca cuando abre el menú de un restaurante.
+  if (!nav.querySelector('.nav-foot')) {
+    const pie = document.createElement('div');
+    pie.className = 'nav-foot';
+    pie.innerHTML =
+      '<a class="nav-call" href="tel:+34620262019">620 26 20 19</a>' +
+      '<a class="nav-wa" href="https://wa.me/34620262019?text=Hola%2C%20me%20gustar%C3%ADa%20reservar%20una%20mesa%20en%20La%20Mamounia.%0A%0APersonas%3A%20%0AD%C3%ADa%3A%20%0AHora%3A%20%0ANombre%3A%20" target="_blank" rel="noopener">Reservar por WhatsApp ↗</a>' +
+      '<span class="nav-place">P.º Marítimo Rey de España, 5 · Fuengirola</span>';
+    nav.append(pie);
+  }
+
+  // Marca dentro del panel: el panel cubre la cabecera (es hija suya), así que
+  // el nombre tiene que estar también aquí para no perder la referencia.
+  if (!nav.querySelector('.nav-marca')) {
+    const marca = document.createElement('span');
+    marca.className = 'nav-marca';
+    marca.setAttribute('aria-hidden', 'true');
+    marca.textContent = 'La Mamounia';
+    nav.prepend(marca);
+  }
+
+  const icono = toggle.querySelector('span');
+  // La cabecera cambia de alto según haya avisos o no, así que el panel se
+  // ajusta a la posición real del botón en vez de a una medida fija.
+  const ajustarAlBoton = () => {
+    const caja = toggle.getBoundingClientRect();
+    nav.style.setProperty('--nav-top', `${Math.round(caja.bottom + 30)}px`);
+    nav.style.setProperty('--marca-top', `${Math.round(caja.top + caja.height / 2 - 14)}px`);
+  };
+  const abrir = () => {
+    ajustarAlBoton();
+    nav.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('nav-abierto');
+    toggle.setAttribute('aria-label', 'Cerrar menú');
+    toggle.firstChild.textContent = 'Cerrar ';
+    icono.textContent = '✕';
+  };
+  const cerrar = () => {
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-abierto');
+    toggle.setAttribute('aria-label', 'Abrir menú');
+    toggle.firstChild.textContent = 'Menú ';
+    icono.textContent = '☰';
+  };
+
+  toggle.addEventListener('click', () =>
+    toggle.getAttribute('aria-expanded') === 'true' ? cerrar() : abrir());
+  enlaces.forEach(a => a.addEventListener('click', cerrar));
+  nav.querySelectorAll('.nav-foot a').forEach(a => a.addEventListener('click', cerrar));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('open')) { cerrar(); toggle.focus(); }
+  });
+  // Al pasar a escritorio el panel deja de tener sentido.
+  matchMedia('(min-width:801px)').addEventListener('change', cerrar);
+  cerrar();
+}
+
 const dialog=document.querySelector('#lightbox');
 if(dialog){document.querySelectorAll('.gallery-open').forEach(button=>button.addEventListener('click',()=>{const source=button.querySelector('img');dialog.querySelector('img').src=source.src;dialog.querySelector('img').alt=source.alt;dialog.querySelector('p').textContent=source.alt;dialog.showModal()}));dialog.querySelector('button').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});document.querySelectorAll('[data-gallery]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-gallery]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));document.querySelectorAll('[data-kind]').forEach(f=>f.hidden=button.dataset.gallery!=='todos'&&f.dataset.kind!==button.dataset.gallery)}))}
 /* El formulario de reserva se retiró: la reserva es por teléfono o WhatsApp,
@@ -87,8 +159,24 @@ if(announcement){
  reduce.addEventListener('change',e=>{if(e.matches){paused=true;stopNotices();paintPause()}});
  paintPause();paintNotice();startNotices();
 }
-const scenes={interior:{image:'interior',alt:'Mosaicos, arco decorativo y sillas turquesa de La Mamounia'},tajines:{image:'tajines',alt:'Tajines en la vajilla de La Mamounia'},sala:{image:'sala',alt:'Lámparas y decoración del salón de La Mamounia'}};
-document.querySelectorAll('[data-scene]').forEach(button=>button.addEventListener('click',()=>{const scene=scenes[button.dataset.scene];const img=document.querySelector('.hero-image');img.src=`assets/images/${scene.image}.jpg`;img.alt=scene.alt;img.classList.remove('scene-enter');requestAnimationFrame(()=>img.classList.add('scene-enter'));document.querySelectorAll('[data-scene]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)))}));
+/* Escenas del hero. Cada una usa una foto distinta acorde con su nombre.
+   Hay que cambiar el srcset y no sólo el src: con srcset presente, el
+   navegador lo prioriza y la imagen no cambiaba nunca. */
+const scenes={
+ interior:{image:'interior',anchos:[640],alt:'Fachada y mosaicos de La Mamounia, con las mesas preparadas'},
+ tajines:{image:'tajines',anchos:[640,1024],alt:'Selección de tajines servidos en La Mamounia'},
+ sala:{image:'sala',anchos:[640],alt:'Lámparas y decoración del salón de La Mamounia'}
+};
+document.querySelectorAll('[data-scene]').forEach(button=>button.addEventListener('click',()=>{
+ const scene=scenes[button.dataset.scene];
+ const img=document.querySelector('.hero-image');
+ img.srcset=scene.anchos.map(w=>`assets/images/${scene.image}-${w}.webp ${w}w`).join(', ');
+ img.src=`assets/images/${scene.image}-${scene.anchos[0]}.webp`;
+ img.alt=scene.alt;
+ img.classList.remove('scene-enter');
+ requestAnimationFrame(()=>img.classList.add('scene-enter'));
+ document.querySelectorAll('[data-scene]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+}));
 const plans={
  sharing:{image:'mezze',alt:'Mezze y ensaladas para compartir',label:'AL CENTRO DE LA MESA',title:'Un mezze. Muchas conversaciones.',copy:'Empieza con la selección de mezze frío y caliente para dos. Después, decidid juntos por dónde seguir.',link:'Ver los mezze ↗',href:'carta.html?categoria=mezze'},
  evening:{image:'mesa',alt:'Mesa preparada con vajilla decorada',label:'UNA MESA PARA DOS',title:'Que la noche se alargue.',copy:'Tajines, una mesa junto al paseo y tiempo para la sobremesa. Si quieres venir una noche con música, consulta primero las fechas.',link:'Preparar nuestra visita ↗',href:'contacto.html#reservar'},
